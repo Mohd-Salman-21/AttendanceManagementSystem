@@ -1,13 +1,11 @@
 package dell.example.com.letschat;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.provider.ContactsContract;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -19,9 +17,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -190,9 +185,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                     // Move user to login screen
 
-                    Intent intent=new Intent(RegisterActivity.this,Login_Activity.class);
-                    finish();
-                    startActivity(intent);
+//                    Intent intent=new Intent(RegisterActivity.this,Login_Activity.class);
+//                    finish();
+//                    startActivity(intent);
 
                 }
 

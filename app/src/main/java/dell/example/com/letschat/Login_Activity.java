@@ -1,4 +1,4 @@
-package dell.example.com.letschat;
+
 
 import android.app.ProgressDialog;
 import android.content.Intent;
