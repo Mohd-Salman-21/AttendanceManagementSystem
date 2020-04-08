@@ -2,14 +2,15 @@ package dell.example.com.letschat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +28,7 @@ public class Login_Activity extends AppCompatActivity {
 
     EditText myEmail;
     EditText myPassword;
+    Spinner mspinner;
 
     // Progess dialog box
 
@@ -41,6 +43,7 @@ public class Login_Activity extends AppCompatActivity {
 
         myEmail=findViewById(R.id.login_email);
         myPassword=findViewById(R.id.login_password);
+        mspinner=findViewById(R.id.spinner);
 
         // Get the instance of Firebase
 
@@ -52,6 +55,12 @@ public class Login_Activity extends AppCompatActivity {
         mProgress.setMessage("Please wait...");
         mProgress.setCancelable(false);
         mProgress.setIndeterminate(true);
+
+
+
+        ArrayAdapter<CharSequence> spinneradapter=ArrayAdapter.createFromResource(this,R.array.usertype,R.layout.support_simple_spinner_dropdown_item);
+        mspinner.setAdapter(spinneradapter);
+
 
 
     }
@@ -95,9 +104,37 @@ public class Login_Activity extends AppCompatActivity {
                     mProgress.dismiss();
                 }else{
 
-                    Intent intent=new Intent(Login_Activity.this,MainChatActivity.class);
-                    finish();
-                    startActivity(intent);
+                    String mstring =mspinner.getSelectedItem().toString();
+
+                    if(mstring.equals("admin"))
+                    {
+                        // Toast.makeText(Login_Activity.this,"inside admin",Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(Login_Activity.this,AdminActivity.class);
+                        finish();
+                        Login_Activity.this.startActivity(intent);
+//                    }else if(mstring.equals("teacher"))
+//                        {
+//                            Intent intent=new Intent(Login_Activity.this,TestActivity.class);
+//                            finish();
+//                            startActivity(intent);
+//                        }
+//                        else if (mstring.equals("student")){
+//                            Intent intent=new Intent(Login_Activity.this,StudentActivity.class);
+//                            finish();
+//                            startActivity(intent);
+                    }else
+                    {
+                        Toast.makeText(Login_Activity.this,"what wrong",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+//
+//                    Intent intent=new Intent(Login_Activity.this,MainChatActivity.class);
+//                    finish();
+//                    startActivity(intent);
+                    Toast.makeText(Login_Activity.this,"otshde",Toast.LENGTH_SHORT).show();
+
+
 
 
                 }

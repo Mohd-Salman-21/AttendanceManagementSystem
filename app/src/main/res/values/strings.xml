@@ -17,4 +17,17 @@
 
     <string name="action_settings">Settings</string>
 
+
+    <string-array name="usertype">
+        <item>admin</item>
+        <item>teacher</item>
+        <item>student</item>
+    </string-array>
+
+    // For admin activity
+
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="title_activity_admin">AdminActivity</string>
 </resources>

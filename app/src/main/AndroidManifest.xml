@@ -18,6 +18,13 @@
         </activity>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainChatActivity" />
+        <activity android:name=".AdminActivity"
+
+
+            android:label="@string/title_activity_admin"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
