@@ -21,6 +21,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import dell.example.com.letschat.Admin.AdminActivity;
+import dell.example.com.letschat.Student.studentlogin;
+import dell.example.com.letschat.Teacher.TeacherActivity;
+
 
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -151,7 +155,8 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         if (item == "Teacher" && pass.equalsIgnoreCase(this.dbpassword)) {
 
             mDialog.dismiss();
-            Intent intent = new Intent(this, teacherlogin.class);
+            Toast.makeText(getApplicationContext()," gone to teacher activity",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, TeacherActivity.class);
             intent.putExtras(basket);
             startActivity(intent);
 
@@ -160,7 +165,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         else if (item == "Admin" && pass.equalsIgnoreCase(this.dbpassword) ) {
             //  if (userid.equalsIgnoreCase("admin") && pass.equals("admin")) {
             mDialog.dismiss();
-            Intent intent = new Intent(this, adminlogin.class);
+            Intent intent = new Intent(this, AdminActivity.class);
             intent.putExtras(basket);
             startActivity(intent);
             //  }
@@ -174,6 +179,10 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         else if(! pass.equalsIgnoreCase(this.dbpassword)){
             Toast.makeText(getApplicationContext(),"UserId or Password is Incorrect", Toast.LENGTH_LONG).show();
 
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),"Not gone to other activity",Toast.LENGTH_LONG).show();
         }
 
     }

@@ -32,13 +32,16 @@
     <string name="title_activity_admin">AdminActivity</string>
 
 
-
     <array name="classes">
-        <item>select Class</item>>
-        <item>IT-A</item>
-        <item>IT-B</item>
-        <item>IT-C</item>
-        <item>IT-D</item>
+        <item>select Branch</item>>
+        <item>CSE</item>
+        <item>IT</item>
+        <item>ECE</item>
+        <item>CIVIL</item>
+        <item>MECHNICAL</item>
+        <item>METALLURGY</item>
+        <item>ELECTRICAL</item>
+        <item>CHEMICAL</item>
 
     </array>
     <array name="periods">
@@ -53,8 +56,6 @@
         <item>p8</item>
 
     </array>
-
-
 
 
 </resources>
