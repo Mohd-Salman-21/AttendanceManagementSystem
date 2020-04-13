@@ -21,9 +21,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import dell.example.com.letschat.Admin.AdminActivity;
+import dell.example.com.letschat.PreviousActivities.adminlogin;
 import dell.example.com.letschat.Student.studentlogin;
-import dell.example.com.letschat.Teacher.TeacherActivity;
+import dell.example.com.letschat.Teacher.teacherlogin;
 
 
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
             mDialog.dismiss();
             Toast.makeText(getApplicationContext()," gone to teacher activity",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, TeacherActivity.class);
+            Intent intent = new Intent(this, teacherlogin.class);
             intent.putExtras(basket);
             startActivity(intent);
 
@@ -165,7 +165,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         else if (item == "Admin" && pass.equalsIgnoreCase(this.dbpassword) ) {
             //  if (userid.equalsIgnoreCase("admin") && pass.equals("admin")) {
             mDialog.dismiss();
-            Intent intent = new Intent(this, AdminActivity.class);
+            Intent intent = new Intent(this, adminlogin.class);
             intent.putExtras(basket);
             startActivity(intent);
             //  }

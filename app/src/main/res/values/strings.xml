@@ -32,18 +32,27 @@
     <string name="title_activity_admin">AdminActivity</string>
 
 
-    <array name="classes">
-        <item>select Branch</item>>
+    <array name="department">
+        <item>select Department</item>>
         <item>CSE</item>
         <item>IT</item>
-        <item>ECE</item>
-        <item>CIVIL</item>
-        <item>MECHNICAL</item>
-        <item>METALLURGY</item>
         <item>ELECTRICAL</item>
-        <item>CHEMICAL</item>
-
+        <item>MECHANICAL</item>
     </array>
+
+        <array name="semester">
+            <item>select semester</item>
+            <item>First</item>
+            <item>Second</item>
+            <item>Third</item>
+            <item>Fourth</item>
+            <item>Fifth</item>
+            <item>Sixth</item>
+            <item>Seventh</item>
+            <item>Eighth</item>
+        </array>
+
+
     <array name="periods">
         <item>select Period</item>>
         <item>p1</item>

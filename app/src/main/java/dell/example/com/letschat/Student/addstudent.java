@@ -21,8 +21,8 @@ import dell.example.com.letschat.UtilityClasses.Student;
 public class addstudent extends AppCompatActivity {
     EditText Sname;
     EditText Sid,spassword;
-    String sname,sid,classname,spass;
-    Spinner classes;
+    String sname,sid,departmentName,semesterName,spass;
+    Spinner classes,department,semester;
     DatabaseReference databaseStudent;
     Toolbar mToolbar;
     @Override
@@ -34,7 +34,9 @@ public class addstudent extends AppCompatActivity {
 
         Sname =  (EditText) findViewById(R.id.editText1);
         Sid =  (EditText) findViewById(R.id.editText3);
-        classes = (Spinner) findViewById(R.id.spinner3);
+        //classes = (Spinner) findViewById(R.id.spinner3);
+        department=findViewById(R.id.spinnerDepartment);
+        semester=findViewById(R.id.spinnerSemester);
         spassword = (EditText) findViewById(R.id.editText4);
         mToolbar=(Toolbar)findViewById(R.id.ftoolbar);
         setSupportActionBar(mToolbar);
@@ -56,10 +58,11 @@ public class addstudent extends AppCompatActivity {
             //String id = databaseStudent.push().getKey();
             sname = Sname.getText().toString();
             sid = Sid.getText().toString();
-            classname = classes.getSelectedItem().toString();
+            departmentName = department.getSelectedItem().toString();
+            semesterName=semester.getSelectedItem().toString();
             spass = spassword.getText().toString();
 
-            Student student =new Student(sname ,sid,classname,spass );
+            Student student =new Student(sname ,sid,spass,semesterName,departmentName );
             databaseStudent.child(sid).setValue(student);
             Toast.makeText(getApplicationContext(),"student added successfully", Toast.LENGTH_LONG).show();
 

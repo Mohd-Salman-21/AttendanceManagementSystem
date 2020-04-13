@@ -42,15 +42,19 @@
         <activity
             android:name=".Teacher.addteacher"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Attendance.admin_attendanceSheet" />
+        <activity android:name=".Attendance.admin_attendanceSheet"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".PreviousActivities.adminlogin" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".Attendance.student_attendance_sheet" />
+        <activity android:name=".Attendance.student_attendance_sheet"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Student.studentlogin"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Attendance.takeAttendance" />
-        <activity android:name=".Attendance.teacher_attendanceSheet" />
+        <activity android:name=".Attendance.takeAttendance"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Attendance.teacher_attendanceSheet"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Teacher.TeacherActivity"
             android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>

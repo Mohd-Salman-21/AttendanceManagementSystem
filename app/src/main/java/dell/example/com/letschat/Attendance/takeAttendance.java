@@ -65,7 +65,7 @@ public class takeAttendance extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_attendance);
         mToolbar=(Toolbar)findViewById(R.id.takeattendancebar);
-        setSupportActionBar(mToolbar);
+          setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Attendance");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         period = (Spinner) findViewById(R.id.spinner4);
