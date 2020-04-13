@@ -3,9 +3,9 @@ package dell.example.com.letschat.PreviousActivities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -23,18 +23,20 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import dell.example.com.letschat.Admin.AddCourse;
 import dell.example.com.letschat.Attendance.Attendance_sheet;
+import dell.example.com.letschat.Attendance.admin_attendanceSheet;
 import dell.example.com.letschat.LoginActivity;
 import dell.example.com.letschat.R;
 import dell.example.com.letschat.Student.addstudent;
 import dell.example.com.letschat.Teacher.addteacher;
-import dell.example.com.letschat.Attendance.admin_attendanceSheet;
 
 public class adminlogin extends AppCompatActivity {
 
     DatabaseReference ref;
     DatabaseReference dbStudent;
     DatabaseReference dbAttendance;
+    DatabaseReference attendacne;
     DatabaseReference dbadmin;
     Toolbar mToolbar;
     private static long back_pressed;
@@ -51,11 +53,19 @@ public class adminlogin extends AppCompatActivity {
         ref = FirebaseDatabase.getInstance().getReference();
         dbStudent = ref.child("Student");
         dbAttendance = ref.child("attendance");
+        attendacne=ref.child("Attendance");
 
 
 
 
 
+
+    }
+
+    public void AddCourseButton(View v)
+    {
+        Intent intent=new Intent(this,AddCourse.class);
+        startActivity(intent);
     }
     public void AddTeacherButton(View v){
         Intent intent = new Intent(this, addteacher.class);

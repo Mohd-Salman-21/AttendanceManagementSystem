@@ -40,17 +40,25 @@
         <item>MECHANICAL</item>
     </array>
 
-        <array name="semester">
-            <item>select semester</item>
-            <item>First</item>
-            <item>Second</item>
-            <item>Third</item>
-            <item>Fourth</item>
-            <item>Fifth</item>
-            <item>Sixth</item>
-            <item>Seventh</item>
-            <item>Eighth</item>
-        </array>
+    <array name="course">
+        <item>select Course</item>>
+        <item>CSE-01</item>
+        <item>CSE-02</item>
+        <item>CSE-03</item>
+        <item>CSE-04</item>
+    </array>
+
+    <array name="semester">
+        <item>select semester</item>
+        <item>First</item>
+        <item>Second</item>
+        <item>Third</item>
+        <item>Fourth</item>
+        <item>Fifth</item>
+        <item>Sixth</item>
+        <item>Seventh</item>
+        <item>Eighth</item>
+    </array>
 
 
     <array name="periods">

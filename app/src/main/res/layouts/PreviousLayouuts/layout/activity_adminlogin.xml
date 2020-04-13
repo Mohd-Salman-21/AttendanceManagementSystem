@@ -63,7 +63,15 @@
             android:onClick="AddStudentButton"
             android:text="Add/Remove Student"
             />
-
+        <Button
+            android:id="@+id/coursebtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="AddCourseButton"
+            android:textColor="#000"
+            android:background="@drawable/selector"
+            android:text="Add/Remove Course" />
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
@@ -85,6 +93,7 @@
             android:textColor="#000"
             android:background="@drawable/selector"
             android:text="Attendance Record" />
+
         <Button
             android:id="@+id/logout"
             android:layout_width="match_parent"
