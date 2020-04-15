@@ -20,24 +20,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/takeattendancebar"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/bottom">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:text="TextView"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.917"
-            app:layout_constraintLeft_toLeftOf="@+id/btshow"
-            app:layout_constraintRight_toRightOf="@+id/btshow"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.004"
-            tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintRight_creator="1" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="36dp"-->
+            <!--android:text="TextView"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="20dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.917"-->
+            <!--app:layout_constraintLeft_toLeftOf="@+id/btshow"-->
+            <!--app:layout_constraintRight_toRightOf="@+id/btshow"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintVertical_bias="0.004"-->
+            <!--tools:layout_constraintLeft_creator="1"-->
+            <!--tools:layout_constraintRight_creator="1" />-->
 
         <Spinner
             android:id="@+id/spinner4"
@@ -46,11 +47,12 @@
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:entries="@array/periods"
+             android:entries="@array/course"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.063"
-            tools:layout_editor_absoluteX="8dp" />
+            tools:layout_editor_absoluteX="8dp"
+           />
 
 
         <ListView

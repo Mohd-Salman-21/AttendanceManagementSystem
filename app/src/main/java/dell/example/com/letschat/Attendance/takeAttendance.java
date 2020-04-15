@@ -4,6 +4,7 @@ package dell.example.com.letschat.Attendance;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,13 +14,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,9 +39,16 @@ import jxl.write.WriteException;
 
 
 public class takeAttendance extends AppCompatActivity {
+
+    // written by salman
+
+    ArrayList<Integer> marray=new ArrayList<Integer>(10);
+
+    // ends here
+
     String teacher_id;
     String class_selected;
-    Spinner period;
+    Spinner period,courseSelected;
     String periodno;
     ArrayList<String> selectedItems;
     ArrayList<String> nonselectedItems;
@@ -68,13 +72,13 @@ public class takeAttendance extends AppCompatActivity {
           setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Attendance");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        period = (Spinner) findViewById(R.id.spinner4);
+        courseSelected = (Spinner) findViewById(R.id.spinner4);
 
         // ArrayList Userlist;
         selectedItems = new ArrayList<String>();
 
-        TextView classname = (TextView) findViewById(R.id.textView);
-        classname.setText("IT-X");
+//        TextView classname = (TextView) findViewById(R.id.textView);
+//        classname.setText("IT-X");
 
         //to get class name from teacherlogin
         Bundle bundle1 = getIntent().getExtras();
@@ -82,36 +86,36 @@ public class takeAttendance extends AppCompatActivity {
         teacher_id = bundle1.getString("tid");
         //  Toast.makeText(getApplicationContext(), teacher_id, Toast.LENGTH_LONG).show();
 
-        classname.setText(class_selected);
+       // classname.setText(class_selected);
 
 
-        DatabaseReference dbuser = ref.child("Student");
-
-        dbuser.orderByChild("classes").equalTo(class_selected).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                // Result will be holded Here
-
-                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    Userlist.add(dsp.child("sid").getValue().toString()); //add result into array list
-                    Usernames.add(dsp.child("sname").getValue().toString());
-
-
-                }
-                OnStart(Userlist);
-
-            }
-
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_LONG).show();
-            }
-
-        });
-
+//             DatabaseReference dbuser = ref.child("Student");
+//
+//        dbuser.orderByChild("classes").equalTo(class_selected).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//
+//                // Result will be holded Here
+//
+//                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+//                    Userlist.add(dsp.child("sid").getValue().toString()); //add result into array list
+//                    Usernames.add(dsp.child("sname").getValue().toString());
+//
+//
+//                }
+//                OnStart(Userlist);
+//
+//            }
+//
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_LONG).show();
+//            }
+//
+//        });
+//
 
     }
 

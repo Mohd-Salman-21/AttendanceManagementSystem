@@ -7,20 +7,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import dell.example.com.letschat.LoginActivity;
-import dell.example.com.letschat.R;
 import dell.example.com.letschat.Attendance.takeAttendance;
 import dell.example.com.letschat.Attendance.teacher_attendanceSheet;
+import dell.example.com.letschat.LoginActivity;
+import dell.example.com.letschat.R;
 
 public class teacherlogin extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     String item;
@@ -45,24 +42,24 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
         TextView txtView = (TextView) findViewById(R.id.textView1);
         txtView.setText("Welcome : "+message);
 
-        // Spinner click listener
-        spinner2.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
-
-        // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
-        categories.add("IT-A");
-        categories.add("IT-B");
-        categories.add("IT-C");
-        categories.add("IT-D");
-
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        spinner2.setAdapter(dataAdapter);
+//        // Spinner click listener
+//        spinner2.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+//
+//        // Spinner Drop down elements
+//        List<String> categories = new ArrayList<String>();
+//        categories.add("IT-A");
+//        categories.add("IT-B");
+//        categories.add("IT-C");
+//        categories.add("IT-D");
+//
+//        // Creating adapter for spinner
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+//
+//        // Drop down layout style - list view with radio button
+//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//        // attaching data adapter to spinner
+//        spinner2.setAdapter(dataAdapter);
     }
 
     @Override
@@ -78,7 +75,7 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
     }
     public void takeAttendanceButton(View v){
         Bundle basket= new Bundle();
-        basket.putString("class_selected", item);
+      // basket.putString("class_selected", item);
         basket.putString("tid", message);
 
 
