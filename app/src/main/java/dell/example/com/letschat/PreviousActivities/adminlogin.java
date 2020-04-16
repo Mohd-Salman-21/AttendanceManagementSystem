@@ -91,8 +91,8 @@ public class adminlogin extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String sid,P1="-",P2="-",P3="-",P4="-",P5="-",P6="-",P7="-",P8="-";
-                Attendance_sheet a = new Attendance_sheet(P1,P2,P3,P4,P5,P6,P7,P8);
+                String sid,P1="-";
+                Attendance_sheet a = new Attendance_sheet(P1);
                 // Result will be holded Here
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                     sid=dsp.child("sid").getValue().toString(); //add result into array list
