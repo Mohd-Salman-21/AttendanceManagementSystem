@@ -74,7 +74,7 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
     }
     public void takeAttendanceButton(View v){
         Bundle basket= new Bundle();
-      // basket.putString("class_selected", item);
+
         basket.putString("tid", message);
 
 

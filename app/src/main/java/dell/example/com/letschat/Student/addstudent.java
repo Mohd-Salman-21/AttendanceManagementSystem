@@ -62,7 +62,7 @@ public class addstudent extends AppCompatActivity {
             semesterName=semester.getSelectedItem().toString();
             spass = spassword.getText().toString();
 
-            Student student =new Student(sname ,sid,spass,semesterName,departmentName );
+            Student student =new Student(sname ,sid,spass );
             databaseStudent.child("Department").child(departmentName).child("Semester").child(semesterName).child(sid).setValue(student);
             Toast.makeText(getApplicationContext(),"student added successfully", Toast.LENGTH_LONG).show();
 
@@ -70,16 +70,7 @@ public class addstudent extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"fields cannot be empty", Toast.LENGTH_LONG).show();
         }
     }
-    public void removeStudent(View v){
-        if (!TextUtils.isEmpty(Sid.getText().toString())) {
-            sid = Sid.getText().toString();
-            databaseStudent.child(sid).setValue(null);
-            Toast.makeText(getApplicationContext(),"teacher removed successfully", Toast.LENGTH_LONG).show();
 
-        }else {
-            Toast.makeText(getApplicationContext(),"id cannot be empty", Toast.LENGTH_LONG).show();
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

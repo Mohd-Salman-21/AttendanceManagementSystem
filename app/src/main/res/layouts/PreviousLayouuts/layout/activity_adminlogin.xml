@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,7 +14,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/linear"
-    tools:context="com.example.admin.eattendance.adminlogin"
+    tools:context="dell.example.com.letschat.PreviousActivities.adminlogin"
     android:background="@drawable/recta">
     <include
         android:id="@+id/ftoolbar"
@@ -44,15 +52,25 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/AddTeacherBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:onClick="AddTeacherButton"
             android:textColor="#000"
             android:background="@drawable/selector"
-            android:text="Add/Remove Teacher"
+            android:text="Add Teacher"
             />
+
+        <Button
+            android:id="@+id/RemoveTeacherBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/selector"
+            android:onClick="RemoveTeacherButton"
+            android:text="Remove Teacher"
+            android:textColor="#000" />
         <Button
             android:id="@+id/addstudentbutton"
             android:layout_width="match_parent"
@@ -61,7 +79,17 @@
             android:textColor="#000"
             android:background="@drawable/selector"
             android:onClick="AddStudentButton"
-            android:text="Add/Remove Student"
+            android:text="Add Student"
+            />
+        <Button
+            android:id="@+id/removeStudentButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="#000"
+            android:background="@drawable/selector"
+            android:onClick="RemoveStudentButton"
+            android:text="Remove Student"
             />
         <Button
             android:id="@+id/coursebtn"
@@ -72,15 +100,7 @@
             android:textColor="#000"
             android:background="@drawable/selector"
             android:text="Add/Remove Course" />
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:onClick="CreateAttendance"
-            android:textColor="#000"
-            android:background="@drawable/selector"
-            android:text="Create today's attendance" />
+
 
 
 
@@ -93,6 +113,16 @@
             android:textColor="#000"
             android:background="@drawable/selector"
             android:text="Attendance Record" />
+
+        <Button
+            android:id="@+id/add_course_to_teacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/selector"
+            android:onClick="addCourseToTeacher"
+            android:text="Add Courses To Teacher"
+            android:textColor="#000" />
 
         <Button
             android:id="@+id/logout"
@@ -123,3 +153,5 @@
             />
     </LinearLayout>
 </LinearLayout>
+
+</ScrollView>

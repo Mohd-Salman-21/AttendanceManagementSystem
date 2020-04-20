@@ -65,6 +65,17 @@
             app:layout_constraintVertical_bias="0.431"
             tools:layout_editor_absoluteX="8dp" />
 
+        <!--<Spinner-->
+            <!--android:id="@+id/attendanceSpinnerCourse"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_margin="10dp"-->
+
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintVertical_bias="0.431"-->
+            <!--tools:layout_editor_absoluteX="8dp" />-->
+
         <Button
             android:id="@+id/attenButton"
             android:layout_width="match_parent"
@@ -75,15 +86,15 @@
             android:background="@drawable/selector"
             android:text="Create today's attendance" />
 
-        <Button
-            android:id="@+id/attenButtonshow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/selector"
-            android:onClick="showfn"
-            android:text="show attendance"
-            android:textColor="#000" />
+        <!--<Button-->
+            <!--android:id="@+id/attenButtonshow"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:background="@drawable/selector"-->
+            <!--android:onClick="showfn"-->
+            <!--android:text="show attendance"-->
+            <!--android:textColor="#000" />-->
 
 
         <ListView
@@ -110,30 +121,29 @@
         android:id="@+id/btshow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="#fff"
-        android:padding="10dp"
+        android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
+        android:layout_weight="1"
         android:background="@drawable/loginselector"
         android:onClick="showSelectedItems"
+        android:padding="10dp"
         android:text="Submit"
 
-        android:layout_alignParentBottom="true"
-        />
+        android:textColor="#000" />
 
-    <Button
-        android:id="@+id/button13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btshow"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="1"
-        android:onClick="addtoreport"
-        android:text="Report"
-        android:textColor="#ffff"
-        android:visibility="invisible"
-        tools:ignore="OnClick" />
+    <!--<Button-->
+        <!--android:id="@+id/button13"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_above="@+id/btshow"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:onClick="addtoreport"-->
+        <!--android:text="Report"-->
+        <!--android:textColor="#ffff"-->
+        <!--android:visibility="invisible"-->
+        <!--tools:ignore="OnClick" />-->
 
 </RelativeLayout>
 

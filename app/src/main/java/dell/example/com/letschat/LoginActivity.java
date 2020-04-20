@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         basket.putString("message", userid);
 
         ref = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference dbuser = ref.child(item).child(userid);
+        DatabaseReference dbuser = ref.child(item).child("Logins").child(userid);
 
         dbuser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -122,13 +122,13 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                     } else {
                         mDialog.dismiss();
                         if (item == "Student") {
-                            dbchild = "spass";
+                            dbchild = "Logins";
                         }
                         if (item == "Teacher") {
-                            dbchild = "tpass";
+                            dbchild = "Logins";
                         }
 
-                        dbpassword = dataSnapshot.child(dbchild).getValue(String.class);
+                        dbpassword = dataSnapshot.getValue(String.class);
                         verify(dbpassword);
                         //do what you want with the email
                     }

@@ -62,7 +62,14 @@
         <activity
             android:name=".Teacher.TeacherActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Admin.AddCourse"></activity>
+        <activity android:name=".Admin.AddCourse" />
+        <activity
+            android:name=".Student.RemoveStudent"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Teacher.RemoveTeacher"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Teacher.AddCoursesTeacher"></activity>
     </application>
 
 </manifest>

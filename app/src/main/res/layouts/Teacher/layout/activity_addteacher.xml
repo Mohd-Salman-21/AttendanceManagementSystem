@@ -27,13 +27,13 @@
         >
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/teacherNameAddTeacher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="new teacher name"
+            android:hint="Teacher name"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -41,36 +41,24 @@
             tools:layout_editor_absoluteX="8dp" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/teacherIdAddTeacher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="id"
+            android:hint="Id"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.221"
             tools:layout_editor_absoluteX="8dp" />
 
-        <!--<EditText-->
-            <!--android:id="@+id/editText4"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:ems="10"-->
-            <!--android:hint="subject"-->
-            <!--android:inputType="textPersonName"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--app:layout_constraintVertical_bias="0.378"-->
-            <!--tools:layout_editor_absoluteX="8dp" />-->
+
 
 
         <Spinner
-            android:id="@+id/spinner3"
+            android:id="@+id/spinnerDepartmentAddTeacher"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:entries="@array/department"
@@ -82,13 +70,13 @@
             app:layout_constraintVertical_bias="0.549" />
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/passwordAddTeacher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="password"
+            android:hint="Password"
             android:inputType="textPassword"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -124,24 +112,7 @@
                 android:layout_weight="1"
                 app:layout_constraintVertical_bias="0.863"
                 app:layout_constraintHorizontal_bias="0.171" />
-            <Button
-                android:id="@+id/button10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:onClick="removeTeacher"
-                android:layout_weight="1"
-                android:text="REMOVE"
-                android:background="@drawable/selector"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.832"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.863" />
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -13,22 +13,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import dell.example.com.letschat.Admin.AddCourse;
-import dell.example.com.letschat.Attendance.Attendance_sheet;
 import dell.example.com.letschat.Attendance.admin_attendanceSheet;
 import dell.example.com.letschat.LoginActivity;
 import dell.example.com.letschat.R;
+import dell.example.com.letschat.Student.RemoveStudent;
 import dell.example.com.letschat.Student.addstudent;
+import dell.example.com.letschat.Teacher.AddCoursesTeacher;
+import dell.example.com.letschat.Teacher.RemoveTeacher;
 import dell.example.com.letschat.Teacher.addteacher;
 
 public class adminlogin extends AppCompatActivity {
@@ -51,7 +50,7 @@ public class adminlogin extends AppCompatActivity {
         mToolbar=(Toolbar)findViewById(R.id.ftoolbar);
         mToolbar.setTitle("Admin Dashboard : "+"("+date+")");
         ref = FirebaseDatabase.getInstance().getReference();
-        dbStudent = ref.child("Student");
+        dbStudent = ref.child("Student").child("Department").child("CSE").child("Semester").child("Eighth");
         dbAttendance = ref.child("attendance");
         attendacne=ref.child("Attendance");
 
@@ -71,48 +70,41 @@ public class adminlogin extends AppCompatActivity {
         Intent intent = new Intent(this, addteacher.class);
         startActivity(intent);
     }
+
+    public void RemoveTeacherButton(View v)
+    {
+        Intent intent=new Intent(this,RemoveTeacher.class);
+        startActivity(intent);
+    }
     public void AddStudentButton(View v){
         Intent intent = new Intent(this, addstudent.class);
         startActivity(intent);
     }
+
+    public void RemoveStudentButton(View v)
+    {
+        Intent intent=new Intent(this,RemoveStudent.class);
+        startActivity(intent);
+    }
+
     public void attendanceRecord(View v){
         Intent intent = new Intent(this, admin_attendanceSheet.class);
         startActivity(intent);
     }
 
-    public void CreateAttendance(View v){
-
-        //Toast.makeText(getApplicationContext(),date, Toast.LENGTH_LONG).show();
-
-
-
-
-        dbStudent.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String sid,P1="-";
-                Attendance_sheet a = new Attendance_sheet(P1);
-                // Result will be holded Here
-                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    sid=dsp.child("sid").getValue().toString(); //add result into array list
-                    dbAttendance.child(date).child(sid).setValue(a);
-
-                }
-                Toast.makeText(getApplicationContext(),"successfully created "+date+" db", Toast.LENGTH_LONG).show();
-            }
-
-
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_LONG).show();
-            }
-
-        });
-
-
+    public void addCourseToTeacher(View v)
+    {
+        Intent intent=new Intent(this,AddCoursesTeacher.class);
+        startActivity(intent);
     }
+
+
+
+
+
+
+
+
 
 
     public void logout(View view) {

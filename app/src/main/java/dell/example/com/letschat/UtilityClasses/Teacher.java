@@ -7,22 +7,22 @@ package dell.example.com.letschat.UtilityClasses;
 public class Teacher {
     String tname;
     String tid;
-    //String subject;
-    String classes;
     String tpass;
+    String courses;
 
   /*  public Teacher(String tname, String tid, EditText subject, Spinner classes){
 
     }*/
 
-    public Teacher(String tname, String tid, String subject, String classes, String tpass) {
+    public Teacher(String tname, String tid, String  courses) {
         this.tname = tname;
         this.tid = tid;
-       // this.subject = subject;
-        this.classes = classes;
-        this.tpass = tpass;
+        this.courses=courses;
     }
 
+    public String  getCourses(){
+        return  courses;
+    }
     public String getTname() {
         return tname;
     }
@@ -31,16 +31,7 @@ public class Teacher {
         return tid;
     }
 
-//    public String getSubject() {
-//        return subject;
-//    }
 
-    public String getClasses() {
-        return classes;
-    }
 
-    public String gettpass() {
-        return tpass;
-    }
 
 }
