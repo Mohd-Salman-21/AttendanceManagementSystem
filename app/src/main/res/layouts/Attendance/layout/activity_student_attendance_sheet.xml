@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/recta"
-    tools:context="com.example.admin.eattendance.student_attendance_sheet">
+    tools:context=".Attendance.student_attendance_sheet">
     <include
         android:id="@+id/studentsheet"
         layout="@layout/appbar"

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.admin.eattendance.admin_attendanceSheet"
-    android:background="@drawable/recta">
+    tools:context="dell.example.com.letschat.Attendance.teacher_attendanceSheet"
+   >
     <include
         android:id="@+id/ftoolbar"
         layout="@layout/appbar"
@@ -13,15 +13,56 @@
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="8dp"
         />
+    <Spinner
+           android:layout_below="@+id/ftoolbar"
+        android:id="@+id/teacherattendanceSpinnerDepartment"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:entries="@array/department"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.431"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <Spinner
+ android:layout_below="@+id/teacherattendanceSpinnerDepartment"
+        android:id="@+id/teacherattendanceSpinnerSemester"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:entries="@array/semester"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.431"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <Spinner
+        android:layout_below="@id/teacherattendanceSpinnerSemester"
+        android:id="@+id/teacherattendanceSpinnerCourse"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.431"
+        tools:layout_editor_absoluteX="8dp" />
+
+
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:id="@+id/editlayout"
-        android:layout_below="@id/ftoolbar"
+        android:layout_below="@id/teacherattendanceSpinnerCourse"
         android:layout_weight="5">
+
+
+
         <EditText
             android:id="@+id/date"
             android:layout_width="wrap_content"
@@ -53,8 +94,8 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/button"
             android:onClick="viewlist"
-            android:textColor="#fff"
-            android:text="submit"
+            android:textColor="#000"
+            android:text="Fetch"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.853"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -62,8 +62,9 @@ public class addstudent extends AppCompatActivity {
             semesterName=semester.getSelectedItem().toString();
             spass = spassword.getText().toString();
 
-            Student student =new Student(sname ,sid,spass );
+            Student student =new Student(sname ,sid );
             databaseStudent.child("Department").child(departmentName).child("Semester").child(semesterName).child(sid).setValue(student);
+            databaseStudent.child("Logins").child(sid).setValue(spass);
             Toast.makeText(getApplicationContext(),"student added successfully", Toast.LENGTH_LONG).show();
 
         }else {

@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/recta">
+    tools:context="dell.example.com.letschat.Attendance.takeAttendance"
+    >
 
     <include
         android:id="@+id/takeattendancebar"
@@ -16,34 +16,28 @@
         tools:layout_editor_absoluteX="8dp"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/takeattendancebar"
-        android:orientation="vertical"
-        android:background="@drawable/bottom">
+
 
         <!--<TextView-->
-            <!--android:id="@+id/textView"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="36dp"-->
-            <!--android:text="TextView"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:gravity="center"-->
-            <!--android:textSize="20dp"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintHorizontal_bias="0.917"-->
-            <!--app:layout_constraintLeft_toLeftOf="@+id/btshow"-->
-            <!--app:layout_constraintRight_toRightOf="@+id/btshow"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--app:layout_constraintVertical_bias="0.004"-->
-            <!--tools:layout_constraintLeft_creator="1"-->
-            <!--tools:layout_constraintRight_creator="1" />-->
-
-
+        <!--android:id="@+id/textView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="36dp"-->
+        <!--android:text="TextView"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="20dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.917"-->
+        <!--app:layout_constraintLeft_toLeftOf="@+id/btshow"-->
+        <!--app:layout_constraintRight_toRightOf="@+id/btshow"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="0.004"-->
+        <!--tools:layout_constraintLeft_creator="1"-->
+        <!--tools:layout_constraintRight_creator="1" />-->
 
 
         <Spinner
+            android:layout_below="@+id/takeattendancebar"
             android:id="@+id/attendanceSpinnerDepartment"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -55,6 +49,7 @@
             tools:layout_editor_absoluteX="8dp" />
 
         <Spinner
+            android:layout_below="@+id/attendanceSpinnerDepartment"
             android:id="@+id/attendanceSpinnerSemester"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -66,6 +61,7 @@
             tools:layout_editor_absoluteX="8dp" />
 
         <Spinner
+            android:layout_below="@+id/attendanceSpinnerSemester"
             android:id="@+id/attendanceSpinnerCourse"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -77,73 +73,88 @@
             tools:layout_editor_absoluteX="8dp" />
 
         <Button
+            android:layout_below="@+id/attendanceSpinnerCourse"
             android:id="@+id/attenButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:onClick="CreateAttendance"
-            android:textColor="#000"
             android:background="@drawable/selector"
-            android:text="Create today's attendance" />
+            android:onClick="CreateAttendance"
+            android:text="Create today's attendance"
+            android:textColor="#000" />
 
         <!--<Button-->
-            <!--android:id="@+id/attenButtonshow"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="10dp"-->
-            <!--android:background="@drawable/selector"-->
-            <!--android:onClick="showfn"-->
-            <!--android:text="show attendance"-->
-            <!--android:textColor="#000" />-->
-
-
-        <ListView
-            android:id="@+id/checkable_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.523"
-            app:layout_constraintLeft_toLeftOf="@+id/textView"
-            app:layout_constraintRight_toRightOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.496"
-            tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintRight_creator="1">
+        <!--android:id="@+id/attenButtonshow"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:background="@drawable/selector"-->
+        <!--android:onClick="showfn"-->
+        <!--android:text="show attendance"-->
+        <!--android:textColor="#000" />-->
 
 
 
-        </ListView>
-
-
-    </LinearLayout>
 
     <Button
-        android:id="@+id/btshow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
-        android:background="@drawable/loginselector"
-        android:onClick="showSelectedItems"
-        android:padding="10dp"
-        android:text="Submit"
+            android:layout_below="@+id/attenButton"
+            android:id="@+id/btshow"
 
-        android:textColor="#000" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+       android:layout_margin="10dp"
+            android:background="@drawable/loginselector"
+            android:onClick="showSelectedItems"
+            android:padding="10dp"
+            android:text="Submit"
+            android:textColor="#000" />
+
 
     <!--<Button-->
-        <!--android:id="@+id/button13"-->
-        <!--android:layout_width="wrap_content"-->
+        <!--android:id="@+id/report"-->
+
+        <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
-        <!--android:layout_above="@+id/btshow"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_weight="1"-->
+        <!--android:layout_below="@+id/btshow"-->
+        <!--android:layout_margin="10dp"-->
+
+        <!--android:background="@drawable/loginselector"-->
         <!--android:onClick="addtoreport"-->
+        <!--android:padding="10dp"-->
         <!--android:text="Report"-->
-        <!--android:textColor="#ffff"-->
-        <!--android:visibility="invisible"-->
+        <!--android:textColor="#000"-->
         <!--tools:ignore="OnClick" />-->
+
+
+    <ListView
+        android:id="@+id/checkable_list"
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+
+        android:layout_below="@+id/btshow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintLeft_toLeftOf="@+id/textView"
+        app:layout_constraintRight_toRightOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.496"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1">
+
+
+    </ListView>
+
+
+
+
+
+
+
+
+
+
+
 
 </RelativeLayout>
 

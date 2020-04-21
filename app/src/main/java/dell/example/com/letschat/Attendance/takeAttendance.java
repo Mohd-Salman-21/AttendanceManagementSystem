@@ -28,24 +28,24 @@ import java.util.List;
 import dell.example.com.letschat.R;
 
 
-public class takeAttendance extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class takeAttendance extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     // written by salman
 
 
-     Spinner department;
-     Spinner semester,courseId,courseSpinner;
-     String attenDepartmentName,attenCourseId;
-     String attenSemesterName;
-    DatabaseReference dbAttendance,courses;
+    Spinner department;
+    Spinner semester, courseId, courseSpinner;
+    String attenDepartmentName, attenCourseId;
+    String attenSemesterName;
+    DatabaseReference dbAttendance, courses;
 
-    DatabaseReference dbStudent,dbuser;
+    DatabaseReference dbStudent, dbuser;
 
     // ends here
 
     String teacher_id;
     String class_selected;
-    Spinner period,courseSelected;
+    Spinner period, courseSelected;
     String periodno;
     ArrayList<String> selectedItems;
     ArrayList<String> nonselectedItems;
@@ -63,20 +63,22 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
     String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_attendance);
-        mToolbar=(Toolbar)findViewById(R.id.takeattendancebar);
-          setSupportActionBar(mToolbar);
+        mToolbar = (Toolbar) findViewById(R.id.takeattendancebar);
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Attendance");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-         ref=FirebaseDatabase.getInstance().getReference();
-        dbAttendance=ref.child("Attendance");
-        dbStudent=ref.child("Student");
-        dbuser=ref.child("Student");
-        courses=ref.child("Teacher");
+        ref = FirebaseDatabase.getInstance().getReference();
+        dbAttendance = ref.child("Attendance");
+        dbStudent = ref.child("Student");
+        dbuser = ref.child("Student");
+        courses = ref.child("Teacher");
+
+
+
 
 
         //to get class name from teacherlogin
@@ -84,8 +86,7 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
         teacher_id = bundle1.getString("tid");
 
 
-
-        department=findViewById(R.id.attendanceSpinnerDepartment);
+        department = findViewById(R.id.attendanceSpinnerDepartment);
 
         department.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
 // Create an ArrayAdapter using the string array and a default spinner layout
@@ -97,9 +98,7 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
         department.setAdapter(adapter);
 
 
-
-
-         semester=findViewById(R.id.attendanceSpinnerSemester);
+        semester = findViewById(R.id.attendanceSpinnerSemester);
 
         semester.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
 // Create an ArrayAdapter using the string array and a default spinner layout
@@ -111,20 +110,8 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
         semester.setAdapter(adapter2);
 
 
-
-
-
-
-
-
-
-
-
         // ArrayList Userlist;
         selectedItems = new ArrayList<String>();
-
-
-
 
 
     }
@@ -134,16 +121,16 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
-       if(parent.getId()==R.id.attendanceSpinnerDepartment) {
-           attenDepartmentName = parent.getItemAtPosition(position).toString();
+        if (parent.getId() == R.id.attendanceSpinnerDepartment) {
+            attenDepartmentName = parent.getItemAtPosition(position).toString();
 
-           Toast.makeText(getApplicationContext(),"department",Toast.LENGTH_LONG).show();
-         courseSelection();
+            Toast.makeText(getApplicationContext(), "department", Toast.LENGTH_LONG).show();
+            courseSelection();
 
-       }
-       else if(parent.getId()==R.id.attendanceSpinnerSemester) {
-           attenSemesterName = parent.getItemAtPosition(position).toString();
-         Toast.makeText(getApplicationContext(),"semester",Toast.LENGTH_LONG).show();}
+        } else if (parent.getId() == R.id.attendanceSpinnerSemester) {
+            attenSemesterName = parent.getItemAtPosition(position).toString();
+            Toast.makeText(getApplicationContext(), "semester", Toast.LENGTH_LONG).show();
+        }
 //       }else if(parent.getId()==R.id.attendanceSpinnerCourse)
 //       {
 //           attenCourseId=parent.getItemAtPosition(position).toString();
@@ -151,12 +138,12 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
 //       }
 
 
-
         // Showing selected spinner item
     }
+
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
-        Toast.makeText(getApplicationContext(),"nothng selected",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "nothng selected", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -166,12 +153,10 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
     }
 
 
-    public void courseSelection()
-    {
+    public void courseSelection() {
 
 
-         courses.child("Department").child(attenDepartmentName).child(teacher_id).child("courses").addValueEventListener(new ValueEventListener()
-           {
+        courses.child("Department").child(attenDepartmentName).child(teacher_id).child("courses").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Is better to use a List, because you don't know the size
@@ -179,72 +164,63 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
                 // initialize the array
 //                 List<String> areas = new ArrayList<String>();
 
-                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
                     String areaName = areaSnapshot.getValue(String.class);
                     areas.add(areaName);
                 }
 
-                courseSpinner=findViewById(R.id.attendanceSpinnerCourse);
+                courseSpinner = findViewById(R.id.attendanceSpinnerCourse);
 
 
                 ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, areas);
                 areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 courseSpinner.setAdapter(areasAdapter);
-              courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                  @Override
-                  public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                      attenCourseId=adapterView.getItemAtPosition(i).toString();
-                      Toast.makeText(getApplicationContext(),"courseId",Toast.LENGTH_LONG).show();
+                courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        attenCourseId = adapterView.getItemAtPosition(i).toString();
+                        Toast.makeText(getApplicationContext(), "courseId", Toast.LENGTH_LONG).show();
 
-                  }
+                    }
 
-                  @Override
-                  public void onNothingSelected(AdapterView<?> adapterView) {
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
 
-                  }
-              });
-               
+                    }
+                });
 
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(),"something wrong with courseid",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "something wrong with courseid", Toast.LENGTH_LONG).show();
 
             }
         });
 
 
-
-
-
     }
 
-    public void CreateAttendance(View v){
-
-
-
-
+    public void CreateAttendance(View v) {
 
 
         //Toast.makeText(getApplicationContext(),date, Toast.LENGTH_LONG).show();
-         //dbStudent.child("Department").child("CSE").child("Semester").child("Eighth");
+        //dbStudent.child("Department").child("CSE").child("Semester").child("Eighth");
 
         dbStudent.child("Department").child(attenDepartmentName).child("Semester").child(attenSemesterName).addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String sid,P1="-";
+                String sid, P1 = "-";
                 Attendance_sheet a = new Attendance_sheet(P1);
                 // Result will be holded Here
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    sid=dsp.child("sid").getValue().toString();//add result into array list
+                    sid = dsp.child("sid").getValue().toString();//add result into array list
                     dbAttendance.child("Department").child(attenDepartmentName).child("Semester").child(attenSemesterName).child(attenCourseId).child(date).child(sid).setValue(a);
                 }
-                Toast.makeText(getApplicationContext(),"successfully created "+date+" db", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "successfully created " + date + " db", Toast.LENGTH_LONG).show();
             }
-
 
 
             @Override
@@ -253,8 +229,6 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
             }
 
         });
-
-
 
 
         dbuser.child("Department").child(attenDepartmentName).child("Semester").child(attenSemesterName).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -269,7 +243,8 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
                     Usernames.add(dsp.child("sname").getValue().toString());
 
 
-                }showfn(Userlist);
+                }
+                showfn(Userlist);
 
 
             }
@@ -281,8 +256,6 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
             }
 
         });
-
-
 
 
     }
@@ -316,33 +289,33 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
 
     }
 
-   public void showSelectedItems(View view) {
-       String selItems = "";
+    public void showSelectedItems(View view) {
+        String selItems = "";
 
 
-            dbAttendance=ref.child("Attendance").child("Department").child(attenDepartmentName).child("Semester").child(attenSemesterName).child(attenCourseId).child(date);
+        dbAttendance = ref.child("Attendance").child("Department").child(attenDepartmentName).child("Semester").child(attenSemesterName).child(attenCourseId).child(date);
 
 
-            for (String item : selectedItems) {
-                Toast.makeText(this, "Attendance created Successfully", Toast.LENGTH_SHORT).show();
-                nonselectedItems.remove(item);
-                dbAttendance.child(item).child("p1").setValue("P");
-                if (selItems == "")
-                    selItems = item;
-                else
-                    selItems += "/" + item;
-            }
-            // Toast.makeText(this, selItems, Toast.LENGTH_LONG).show();
-
-
-            //for making absent
-            for (String item : nonselectedItems) {
-                Toast.makeText(this, "Attendance created Successfully", Toast.LENGTH_SHORT).show();
-                dbAttendance.child(item).child("p1").setValue("A");
-                //Toast.makeText(this, "absentees:" + nonselectedItems, Toast.LENGTH_LONG).show();
-
-            }
+        for (String item : selectedItems) {
+            Toast.makeText(this, "Attendance created Successfully", Toast.LENGTH_SHORT).show();
+            nonselectedItems.remove(item);
+            dbAttendance.child(item).child("p1").setValue("P");
+            if (selItems == "")
+                selItems = item;
+            else
+                selItems += "/" + item;
         }
+        // Toast.makeText(this, selItems, Toast.LENGTH_LONG).show();
+
+
+        //for making absent
+        for (String item : nonselectedItems) {
+            Toast.makeText(this, "Attendance created Successfully", Toast.LENGTH_SHORT).show();
+            dbAttendance.child(item).child("p1").setValue("A");
+            //Toast.makeText(this, "absentees:" + nonselectedItems, Toast.LENGTH_LONG).show();
+
+        }
+    }
 
 
 
@@ -355,14 +328,14 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
 //        WritableWorkbook wb=null;
 //        WritableSheet s=null;
 //        try {
-//            workbook = Workbook.getWorkbook(new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/eattendance/" + class_selected+"_month_"+date.substring(3,5)+ ".xls"));
-//            wb = createWorkbook(class_selected+"_month_"+date.substring(3,5),workbook);
+//            workbook = Workbook.getWorkbook(new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/eattendance/" + attenCourseId+"_month_"+date.substring(3,5)+ ".xls"));
+//            wb = createWorkbook(attenCourseId+"_month_"+date.substring(3,5),workbook);
 //            s = wb.getSheet(0);
 //
 //        }
 //        catch (Exception e){
 //            //Toast.makeText(this,e.toString(),Toast.LENGTH_LONG).show();
-//            File wbfile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/eattendance/" + class_selected + ".xls");
+//            File wbfile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/eattendance/" + attenCourseId + ".xls");
 //            wb = createWorkbook(class_selected+"_month_"+date.substring(3,5));
 //            // workbook = Workbook.getWorkbook(new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/eattendance/" + class_selected + ".xls"));
 //            s = createSheet(wb, "month_", 0);//to create month's sheet
@@ -585,7 +558,7 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
 //        return wb.createSheet(sheetName, sheetIndex);
 //
 //    }
-
+//
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
