@@ -25,9 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="E-Attendance "
+        android:text="Attendance "
         android:textColor="#fff"
-        android:textSize="20sp"
+        android:textSize="40sp"
         />
 
     <LinearLayout
