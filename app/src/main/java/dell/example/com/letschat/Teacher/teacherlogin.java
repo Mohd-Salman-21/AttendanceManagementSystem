@@ -1,15 +1,23 @@
 package dell.example.com.letschat.Teacher;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,6 +31,8 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
     String item;
     String message;
     Toolbar mToolbar;
+    DatabaseReference dbadmin;
+    DatabaseReference ref;
     private static long back_pressed;
     String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
     @Override
@@ -41,7 +51,7 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
         getSupportActionBar().setTitle(message);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
+        ref = FirebaseDatabase.getInstance().getReference();
 //        // Spinner click listener
 //        spinner2.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
 //
@@ -115,7 +125,38 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
         startActivity(intent);
     }
 
+    public void changepasswordTeacher(View view) {
+        dbadmin = ref.child("Teacher").child("Logins").child(message);
 
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Type your new password");
+        final LayoutInflater inflater = this.getLayoutInflater();
+        View add_menu_layout = inflater.inflate(R.layout.changepassword, null);
+        final EditText password = (EditText) add_menu_layout.findViewById(R.id.newpassword);
+        alertDialog.setView(add_menu_layout);
+        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(final DialogInterface dialog, int which) {
+                if (!TextUtils.isEmpty(password.getText().toString())) {
+                    dbadmin.setValue(password.getText().toString());
+                    Toast.makeText(teacherlogin.this, "Successfully Changed", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(teacherlogin.this, "Please Enter New Password", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alertDialog.show();
+
+    }
 
 
     @Override
