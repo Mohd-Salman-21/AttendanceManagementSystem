@@ -1,12 +1,13 @@
 package dell.example.com.letschat.Student;
 
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -18,13 +19,13 @@ import dell.example.com.letschat.R;
 import dell.example.com.letschat.UtilityClasses.Student;
 
 
-public class addstudent extends AppCompatActivity {
+public class addstudent extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     EditText Sname;
     EditText Sid,spassword;
     String sname,sid,departmentName,semesterName,spass;
-    Spinner classes,department,semester;
+    Spinner spinnerDepartmentAddStudent,spinnerSemesterAddStudent;
     DatabaseReference databaseStudent;
-    Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,31 +36,65 @@ public class addstudent extends AppCompatActivity {
         Sname =  (EditText) findViewById(R.id.editText1);
         Sid =  (EditText) findViewById(R.id.editText3);
         //classes = (Spinner) findViewById(R.id.spinner3);
-        department=findViewById(R.id.spinnerDepartment);
-        semester=findViewById(R.id.spinnerSemester);
+        spinnerDepartmentAddStudent=findViewById(R.id.spinner_department_add_student);
+        spinnerSemesterAddStudent=findViewById(R.id.spinner_semester_add_student);
         spassword = (EditText) findViewById(R.id.editText4);
-        mToolbar=(Toolbar)findViewById(R.id.ftoolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Add/Remove Student");
+
+
+        getSupportActionBar().setTitle("Add Student");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        spinnerDepartmentAddStudent.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.department, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinnerDepartmentAddStudent.setAdapter(adapter);
 
-       /* addButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                addTeacher();
-            }
-        });*/
+        spinnerSemesterAddStudent.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.semester, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinnerSemesterAddStudent.setAdapter(adapter2);
+
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // On selecting a spinner item
+         if(parent.getId()==R.id.spinner_department_add_student){
+        departmentName = parent.getItemAtPosition(position).toString();}
+         else if(parent.getId()==R.id.spinner_semester_add_student){
+             semesterName=parent.getItemAtPosition(position).toString();
+         }
+
+    }
+
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
+
     }
 
     public void addStudent(View v){
 
+           if(TextUtils.isEmpty(Sname.getText().toString())){
 
-        if (!(TextUtils.isEmpty(Sid.getText().toString()))) {
+               Toast.makeText(getApplicationContext(),"Student name cannot be empty", Toast.LENGTH_LONG).show();
+
+        }else if(TextUtils.isEmpty(Sid.getText().toString())){
+               Toast.makeText(getApplicationContext(),"Student id cannot be empty", Toast.LENGTH_LONG).show();
+
+           }else if(TextUtils.isEmpty(spassword.getText().toString())){
+               Toast.makeText(getApplicationContext(),"Student password cannot be empty", Toast.LENGTH_LONG).show();
+           }
+           else {
             //String id = databaseStudent.push().getKey();
             sname = Sname.getText().toString();
             sid = Sid.getText().toString();
-            departmentName = department.getSelectedItem().toString();
-            semesterName=semester.getSelectedItem().toString();
             spass = spassword.getText().toString();
 
             Student student =new Student(sname ,sid );
@@ -67,8 +102,6 @@ public class addstudent extends AppCompatActivity {
             databaseStudent.child("Logins").child(sid).setValue(spass);
             Toast.makeText(getApplicationContext(),"student added successfully", Toast.LENGTH_LONG).show();
 
-        }else {
-            Toast.makeText(getApplicationContext(),"fields cannot be empty", Toast.LENGTH_LONG).show();
         }
     }
 

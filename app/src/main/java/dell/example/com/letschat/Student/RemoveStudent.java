@@ -2,8 +2,8 @@ package dell.example.com.letschat.Student;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,7 +22,7 @@ public class RemoveStudent extends AppCompatActivity implements AdapterView.OnIt
     String sid,removeDepartmentName,removeSemesterName;
     Spinner removeDepartment,removeSemester;
     DatabaseReference databaseStudent;
-    Toolbar mToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +57,7 @@ public class RemoveStudent extends AppCompatActivity implements AdapterView.OnIt
 // Apply the adapter to the spinner
         removeSemester.setAdapter(adapter2);
 
-        mToolbar=(Toolbar)findViewById(R.id.toolbarRemoveStudent);
-        setSupportActionBar(mToolbar);
+
         getSupportActionBar().setTitle("Remove Student");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -84,7 +83,7 @@ public class RemoveStudent extends AppCompatActivity implements AdapterView.OnIt
     }
     public void removeStudent(View v){
         if (!TextUtils.isEmpty(Sid.getText().toString())) {
-            sid = Sid.getText().toString();
+            sid = Sid.getText().toString().toUpperCase();
 
 
             databaseStudent.child("Department").child(removeDepartmentName).child("Semester").child(removeSemesterName).child(sid).setValue(null);
@@ -93,6 +92,14 @@ public class RemoveStudent extends AppCompatActivity implements AdapterView.OnIt
         }else {
             Toast.makeText(getApplicationContext(),"id cannot be empty", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

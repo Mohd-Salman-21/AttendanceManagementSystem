@@ -6,14 +6,8 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
 tools:context="dell.example.com.letschat.Teacher.addteacher"
-android:background="@drawable/recta">
-<include
-    android:id="@+id/ftoolbar"
-    layout="@layout/appbar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:layout_editor_absoluteX="8dp"
-    />
+android:background="@color/colorBlack">
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -31,7 +25,7 @@ android:background="@drawable/recta">
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="new student name"
+        android:hint="New Student Name"
         android:inputType="textPersonName"
         android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +39,7 @@ android:background="@drawable/recta">
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:ems="10"
-        android:hint="ID"
+        android:hint="Student Enrollment"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -58,7 +52,7 @@ android:background="@drawable/recta">
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:ems="10"
-        android:hint="password"
+        android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -81,7 +75,7 @@ android:background="@drawable/recta">
     <!--tools:layout_editor_absoluteX="8dp" />-->
 
     <Spinner
-        android:id="@+id/spinnerDepartment"
+        android:id="@+id/spinner_department_add_student"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_margin="10dp"
@@ -92,7 +86,7 @@ android:background="@drawable/recta">
         tools:layout_editor_absoluteX="8dp" />
 
     <Spinner
-        android:id="@+id/spinnerSemester"
+        android:id="@+id/spinner_semester_add_student"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_margin="10dp"
@@ -102,14 +96,10 @@ android:background="@drawable/recta">
         app:layout_constraintVertical_bias="0.431"
         tools:layout_editor_absoluteX="8dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="2">
+
         <Button
             android:id="@+id/button9"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
@@ -128,7 +118,7 @@ android:background="@drawable/recta">
             app:layout_constraintVertical_bias="0.778"
             app:layout_constraintHorizontal_bias="0.139" />
 
-    </LinearLayout>
+
 </LinearLayout>
 
 </LinearLayout>

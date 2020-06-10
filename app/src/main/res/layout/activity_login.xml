@@ -4,28 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.admin.demo.LoginActivity"
+    tools:context=".LoginActivity"
     app:layout_constraintTop_toTopOf="@+id/spinner"
     tools:layout_editor_absoluteX="0dp"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center"
-    android:background="@drawable/recta">
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/icon" />
+    android:background="@color/colorPrimary"
+   >
+    <!--<ImageView-->
+        <!--android:id="@+id/imageView"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:src="@drawable/icon" />-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="E-Attendance System"
-        android:textColor="#ffff"
+        android:text="E-Attendance "
+        android:textColor="#fff"
+        android:textSize="20sp"
         />
 
     <LinearLayout
@@ -44,6 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             tools:layout_editor_absoluteX="8dp"
+            android:backgroundTint="@color/colorWhite"
+
             android:layout_marginTop="20dp"/>
 
 
@@ -52,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Username"
+            android:hint="User Id"
             android:textColor="#ffff"
             android:textColorHint="#fff"
             android:layout_margin="10dp"
@@ -70,7 +74,7 @@
             android:layout_margin="10dp"
             android:ems="10"
             android:textColorHint="#fff"
-            android:textColor="#ffff"
+            android:textColor="#fff"
             android:hint="Password"
             android:inputType="textPassword"
             />
@@ -81,13 +85,13 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/imageView"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="48dp"
-            android:background="@drawable/loginselector"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:onClick="onButtonClick"
-            android:text="Login"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+
+            android:layout_marginBottom="48dp"
+            android:background="@drawable/loginselector"
+            android:onClick="onButtonClick"
+            android:text="Login"
             android:textColor="#fff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -67,10 +67,11 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_attendance);
-        mToolbar = (Toolbar) findViewById(R.id.takeattendancebar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Attendance");
+
+
+        getSupportActionBar().setTitle("Take Attendance");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         ref = FirebaseDatabase.getInstance().getReference();
         dbAttendance = ref.child("Attendance");
         dbStudent = ref.child("Student");
@@ -179,7 +180,7 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                         attenCourseId = adapterView.getItemAtPosition(i).toString();
-                        Toast.makeText(getApplicationContext(), "courseId", Toast.LENGTH_LONG).show();
+
 
                     }
 

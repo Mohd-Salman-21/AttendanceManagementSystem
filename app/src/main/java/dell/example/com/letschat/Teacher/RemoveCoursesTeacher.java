@@ -1,7 +1,7 @@
 package dell.example.com.letschat.Teacher;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,35 +14,32 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-
 import dell.example.com.letschat.R;
 
-public class AddCoursesTeacher extends AppCompatActivity implements  AdapterView.OnItemSelectedListener{
+public class RemoveCoursesTeacher extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     EditText techerId,courseCode;
     String courseCodeName,departmentName;
     Spinner department;
     DatabaseReference databaseReference;
 
-
-    ArrayList<String> list=new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_courses_teacher);
-        getSupportActionBar().setTitle("Allocate Course");
+        setContentView(R.layout.activity_remove_courses_teacher);
+
+
+        getSupportActionBar().setTitle("Deallocate Course");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        techerId=findViewById(R.id.teacher_id_course_teacher);
-        courseCode=findViewById(R.id.course_code_addCourseTeacher);
+        techerId=findViewById(R.id.teacher_id_remove_course_teacher);
+        courseCode=findViewById(R.id.course_code_removeCourseTeacher);
 
         databaseReference=FirebaseDatabase.getInstance().getReference();
 
 
-        department=findViewById(R.id.spinner_department_teacher_course);
+        department=findViewById(R.id.spinner_department_teacher_remove_course);
 
 
         department.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
@@ -54,9 +51,7 @@ public class AddCoursesTeacher extends AppCompatActivity implements  AdapterView
 // Apply the adapter to the spinner
         department.setAdapter(adapter);
 
-
     }
-
 
 
     @Override
@@ -72,7 +67,7 @@ public class AddCoursesTeacher extends AppCompatActivity implements  AdapterView
     }
 
 
-    public  void addCourseToTeacher(View view) {
+    public  void removeCourseToTeacher(View view) {
         String id = techerId.getText().toString();
         courseCodeName = courseCode.getText().toString().toUpperCase();
         if (TextUtils.isEmpty(id)) {
@@ -81,8 +76,8 @@ public class AddCoursesTeacher extends AppCompatActivity implements  AdapterView
             Toast.makeText(getApplicationContext(), "Course code cannot be empty", Toast.LENGTH_LONG).show();
         } else {
             //list.add(courseCodeName);
-            databaseReference.child("Teacher").child("Department").child(departmentName).child(id).child("courses").child(courseCodeName).setValue(courseCodeName);
-            Toast.makeText(getApplicationContext(), "Course Added Successfully", Toast.LENGTH_LONG).show();
+            databaseReference.child("Teacher").child("Department").child(departmentName).child(id).child("courses").child(courseCodeName).setValue(null);
+            Toast.makeText(getApplicationContext(), "Course Removed Successfully", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -94,6 +89,7 @@ public class AddCoursesTeacher extends AppCompatActivity implements  AdapterView
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 
 }

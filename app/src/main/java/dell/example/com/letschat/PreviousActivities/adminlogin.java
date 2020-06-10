@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -24,9 +26,11 @@ import dell.example.com.letschat.Admin.AddCourse;
 import dell.example.com.letschat.Attendance.admin_attendanceSheet;
 import dell.example.com.letschat.LoginActivity;
 import dell.example.com.letschat.R;
+import dell.example.com.letschat.RemoveCourse;
 import dell.example.com.letschat.Student.RemoveStudent;
 import dell.example.com.letschat.Student.addstudent;
 import dell.example.com.letschat.Teacher.AddCoursesTeacher;
+import dell.example.com.letschat.Teacher.RemoveCoursesTeacher;
 import dell.example.com.letschat.Teacher.RemoveTeacher;
 import dell.example.com.letschat.Teacher.addteacher;
 
@@ -47,8 +51,11 @@ public class adminlogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adminlogin);
-        mToolbar=(Toolbar)findViewById(R.id.ftoolbar);
-        mToolbar.setTitle("Admin Dashboard : "+"("+date+")");
+
+//        mToolbar = (Toolbar) findViewById(R.id.ftoolbar);
+//        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Admin");
+
         ref = FirebaseDatabase.getInstance().getReference();
         dbStudent = ref.child("Student").child("Department").child("CSE").child("Semester").child("Eighth");
         dbAttendance = ref.child("attendance");
@@ -61,9 +68,33 @@ public class adminlogin extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_adminlogin,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+       int id=item.getItemId();
+       if(id==R.id.logout){
+           Intent logout=new Intent(adminlogin.this,LoginActivity.class);
+
+           startActivity(logout);
+           return true;
+       }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     public void AddCourseButton(View v)
     {
         Intent intent=new Intent(this,AddCourse.class);
+        startActivity(intent);
+    }
+    public void RemoveCourseButton(View v)
+    {
+        Intent intent=new Intent(this,RemoveCourse.class);
         startActivity(intent);
     }
     public void AddTeacherButton(View v){
@@ -98,6 +129,11 @@ public class adminlogin extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void removeCourseToTeacher(View v)
+    {
+        Intent intent=new Intent(this,RemoveCoursesTeacher.class);
+        startActivity(intent);
+    }
 
 
 
@@ -107,7 +143,8 @@ public class adminlogin extends AppCompatActivity {
 
 
 
-    public void logout(View view) {
+
+    public void logout(View v) {
 
         Intent logout=new Intent(adminlogin.this,LoginActivity.class);
         logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -116,7 +153,7 @@ public class adminlogin extends AppCompatActivity {
     }
 
     public void changepassword(View view) {
-        dbadmin=ref.child("Admin");
+        dbadmin=ref.child("Admin").child("Logins").child("Admin");
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("Type your new password");
@@ -130,7 +167,7 @@ public class adminlogin extends AppCompatActivity {
             public void onClick(final DialogInterface dialog, int which) {
                 if (!TextUtils.isEmpty(password.getText().toString()))
                 {
-                    dbadmin.child("Admin").setValue(password.getText().toString());
+                    dbadmin.setValue(password.getText().toString());
                     Toast.makeText(adminlogin.this, "Successfully Changed", Toast.LENGTH_SHORT).show();
                 }
                 else

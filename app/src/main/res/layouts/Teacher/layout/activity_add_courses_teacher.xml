@@ -6,15 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="dell.example.com.letschat.Teacher.AddCoursesTeacher"
-    android:background="@drawable/recta">
+    android:background="@color/colorBlack">
 
-    <include
-        android:id="@+id/ftoolbar"
-        layout="@layout/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,14 +68,6 @@
 
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:weightSum="3">
-
             <Button
                 android:id="@+id/button9"
                 android:layout_width="match_parent"
@@ -93,7 +79,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:onClick="addCourseToTeacher"
-                android:text="Add"
+                android:text="ALLOCATE"
                 android:background="@drawable/selector"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -103,6 +89,5 @@
                 app:layout_constraintVertical_bias="0.863"
                 app:layout_constraintHorizontal_bias="0.171" />
 
-        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

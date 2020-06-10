@@ -58,9 +58,7 @@ public class teacher_attendanceSheet extends AppCompatActivity implements  Adapt
         setContentView(R.layout.activity_teacher_attendance_sheet);
 
         listView = (ListView) findViewById(R.id.list);
-        date = (EditText) findViewById(R.id.date);
-        mToolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.ftoolbar);
-        setSupportActionBar(mToolbar);
+
         getSupportActionBar().setTitle("Previous Record");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle bundle1 = getIntent().getExtras();

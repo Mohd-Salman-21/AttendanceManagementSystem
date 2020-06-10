@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dell.example.com.letschat">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_foreground"
@@ -10,67 +12,39 @@
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <!-- <activity android:name=".Login_Activity"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-        <!-- </intent-filter> -->
-        <!-- </activity> -->
         <activity android:name=".PreviousActivities.RegisterActivity" />
         <activity android:name=".PreviousActivities.MainChatActivity" />
         <activity
             android:name=".Admin.AdminActivity"
-            android:label="@string/title_activity_admin"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+            android:label="@string/title_activity_admin" />
+        <activity
+            android:name=".LoginActivity"
+           >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".Teacher.teacherlogin"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Student.addstudent"
-            android:theme="@style/AppTheme.NoActionBar" />
-        />
-        <activity
-            android:name=".Teacher.addteacher"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Attendance.admin_attendanceSheet"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
+        <activity android:name=".Student.addstudent" />
+        <activity android:name=".Teacher.addteacher" />
+        <activity android:name=".Attendance.admin_attendanceSheet" />
         <activity android:name=".PreviousActivities.adminlogin" />
-        <activity android:name=".LoginActivity" />
-        <activity
-            android:name=".Attendance.student_attendance_sheet"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Student.studentlogin"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Attendance.takeAttendance"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Attendance.teacher_attendanceSheet"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Teacher.TeacherActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Attendance.student_attendance_sheet" />
+        <activity android:name=".Student.studentlogin" />
+        <activity android:name=".Attendance.takeAttendance" />
+        <activity android:name=".Attendance.teacher_attendanceSheet" />
+        <activity android:name=".Teacher.TeacherActivity" />
         <activity android:name=".Admin.AddCourse" />
-        <activity
-            android:name=".Student.RemoveStudent"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Teacher.RemoveTeacher"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Teacher.AddCoursesTeacher"></activity>
+        <activity android:name=".Student.RemoveStudent" />
+        <activity android:name=".Teacher.RemoveTeacher" />
+        <activity android:name=".Teacher.AddCoursesTeacher" />
+        <activity android:name=".RemoveCourse" />
+        <activity android:name=".Teacher.RemoveCoursesTeacher"></activity>
     </application>
 
 </manifest>

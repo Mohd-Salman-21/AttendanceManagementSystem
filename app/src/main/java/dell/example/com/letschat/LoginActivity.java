@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -64,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         categories.add("Student");
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, categories);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -98,71 +99,74 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
         userid = username.getText().toString();
         pass = password.getText().toString();
-        mDialog=new ProgressDialog(this);
-        mDialog.setMessage("Please Wait..."+userid);
-        mDialog.setTitle("Loading");
-        mDialog.show();
-        basket = new Bundle();
-        basket.putString("message", userid);
 
-        ref = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference dbuser = ref.child(item).child("Logins").child(userid);
+        if (TextUtils.isEmpty(userid)) {
+            Toast.makeText(getApplicationContext(), "User Id cannot be empty", Toast.LENGTH_LONG).show();
+        } else if (TextUtils.isEmpty(pass)) {
+            Toast.makeText(getApplicationContext(), "password cannot be empty", Toast.LENGTH_LONG).show();
+        } else {
 
-        dbuser.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String dbchild = null;
-                try {
-                    if (item == "Admin") {
-                        mDialog.dismiss();
-                        dbpassword = dataSnapshot.getValue(String.class);
-                        verify(dbpassword);
+            mDialog = new ProgressDialog(this);
+            mDialog.setMessage("Please Wait..." + userid);
+            mDialog.setTitle("Loading");
+            mDialog.show();
+            basket = new Bundle();
+            basket.putString("message", userid);
+
+            ref = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference dbuser = ref.child(item).child("Logins").child(userid);
+
+            dbuser.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String dbchild = null;
+                    try {
+                        if (item == "Admin") {
+                            mDialog.dismiss();
+                            dbpassword = dataSnapshot.getValue(String.class);
+                            verify(dbpassword);
 
 
-                    } else {
-                        mDialog.dismiss();
-                        if (item == "Student") {
-                            dbchild = "Logins";
+                        } else {
+                            mDialog.dismiss();
+                            if (item == "Student") {
+                                dbchild = "Logins";
+                            }
+                            if (item == "Teacher") {
+                                dbchild = "Logins";
+                            }
+
+                            dbpassword = dataSnapshot.getValue(String.class);
+                            verify(dbpassword);
+                            //do what you want with the email
                         }
-                        if (item == "Teacher") {
-                            dbchild = "Logins";
-                        }
-
-                        dbpassword = dataSnapshot.getValue(String.class);
-                        verify(dbpassword);
-                        //do what you want with the email
+                    } catch (Exception e) {
+                        Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
                 }
-                catch (Exception e)
-                {
-                    Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
     //Toast.makeText(getApplicationContext(),dbpassword, Toast.LENGTH_LONG).show();
 
     public void verify(String dbpassword){
-        if(userid.isEmpty()) {
-            Toast.makeText(getApplicationContext(),"Username cannot be empty", Toast.LENGTH_LONG).show();
-        }
-        else
-        if (item == "Teacher" && pass.equalsIgnoreCase(this.dbpassword)) {
+
+        if (item == "Teacher" && pass.equals(this.dbpassword)) {
 
             mDialog.dismiss();
-            Toast.makeText(getApplicationContext()," gone to teacher activity",Toast.LENGTH_LONG).show();
+
             Intent intent = new Intent(this, teacherlogin.class);
             intent.putExtras(basket);
             startActivity(intent);
 
         }
 
-        else if (item == "Admin" && pass.equalsIgnoreCase(this.dbpassword) ) {
+        else if (item == "Admin" && pass.equals(this.dbpassword) ) {
             //  if (userid.equalsIgnoreCase("admin") && pass.equals("admin")) {
             mDialog.dismiss();
             Intent intent = new Intent(this, adminlogin.class);
@@ -170,20 +174,17 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
             startActivity(intent);
             //  }
         }
-        else if (item == "Student" && pass.equalsIgnoreCase(this.dbpassword)) {
+        else if (item == "Student" && pass.equals(this.dbpassword)) {
             mDialog.dismiss();
             Intent intent = new Intent(this, studentlogin.class);
             intent.putExtras(basket);
             startActivity(intent);
         }
-        else if(! pass.equalsIgnoreCase(this.dbpassword)){
+        else if(! pass.equals(this.dbpassword)){
             Toast.makeText(getApplicationContext(),"UserId or Password is Incorrect", Toast.LENGTH_LONG).show();
 
         }
-        else
-        {
-            Toast.makeText(getApplicationContext(),"Not gone to other activity",Toast.LENGTH_LONG).show();
-        }
+
 
     }
     @Override

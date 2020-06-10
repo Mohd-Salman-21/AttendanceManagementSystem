@@ -33,7 +33,7 @@
 
 
     <array name="department">
-        <item>select Department</item>>
+
         <item>CSE</item>
         <item>IT</item>
         <item>ELECTRICAL</item>
@@ -41,7 +41,7 @@
     </array>
 
     <array name="course">
-        <item>select Course</item>>
+
         <item>CSE-01</item>
         <item>CSE-02</item>
         <item>CSE-03</item>
@@ -49,7 +49,7 @@
     </array>
 
     <array name="semester">
-        <item>select semester</item>
+
         <item>First</item>
         <item>Second</item>
         <item>Third</item>

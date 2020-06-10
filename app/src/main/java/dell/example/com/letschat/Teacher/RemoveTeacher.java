@@ -3,6 +3,7 @@ package dell.example.com.letschat.Teacher;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +28,9 @@ public class RemoveTeacher extends AppCompatActivity  implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remove_teacher);
+
+         getSupportActionBar().setTitle("Remove Teacher");
+       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Tid=findViewById(R.id.teacherIdRemoveTeacher);
 
@@ -65,14 +69,22 @@ public class RemoveTeacher extends AppCompatActivity  implements AdapterView.OnI
 
     public void removeTeacherButton(View v){
         if (!TextUtils.isEmpty(Tid.getText().toString())) {
-            tid = Tid.getText().toString();
+            tid = Tid.getText().toString().toLowerCase();
             databaseTeacher.child("Teacher").child("Department").child(departmentName).child(tid).setValue(null);
             Toast.makeText(getApplicationContext(),"Teacher removed successfully", Toast.LENGTH_LONG).show();
             finish();
 
         }else {
-            Toast.makeText(getApplicationContext(),"id cannot be empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Id cannot be empty", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

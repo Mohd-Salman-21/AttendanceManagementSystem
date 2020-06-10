@@ -3,7 +3,6 @@ package dell.example.com.letschat.Attendance;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -35,14 +34,12 @@ public class admin_attendanceSheet extends AppCompatActivity {
     DatabaseReference dbAttendance;
     DatabaseReference dbStudent;
     String required_date;
-    Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_attendance_sheet);
-        mToolbar=(Toolbar)findViewById(R.id.ftoolbar);
-        setSupportActionBar(mToolbar);
+
         getSupportActionBar().setTitle("Attendance Records");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         listView = (ListView) findViewById(R.id.list);

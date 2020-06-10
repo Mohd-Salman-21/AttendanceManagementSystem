@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -34,12 +35,12 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
         //to get username from login page
         Bundle bundle1 = getIntent().getExtras();
         message = bundle1.getString("message");
-        mToolbar=(Toolbar)findViewById(R.id.takeattendancebar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(message+"'s Dashboard  - "+date);
 
-        TextView txtView = (TextView) findViewById(R.id.textView1);
-        txtView.setText("Welcome : "+message);
+
+
+        getSupportActionBar().setTitle(message);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
 //        // Spinner click listener
 //        spinner2.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
@@ -59,6 +60,27 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
 //
 //        // attaching data adapter to spinner
 //        spinner2.setAdapter(dataAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_adminlogin,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id=item.getItemId();
+        if(id==R.id.logout){
+            Intent logout=new Intent(teacherlogin.this,LoginActivity.class);
+
+            startActivity(logout);
+            return true;
+        }else if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -94,11 +116,7 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-    public void logoutTeacher(View view) {
-        Intent logoutTeacher=new Intent(teacherlogin.this,LoginActivity.class);
-        logoutTeacher.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(logoutTeacher);
-    }
+
 
     @Override
     public void onBackPressed() {
@@ -113,4 +131,6 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
             back_pressed = System.currentTimeMillis();
         }
     }
+
+
 }

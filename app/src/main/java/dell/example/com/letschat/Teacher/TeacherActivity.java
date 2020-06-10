@@ -102,4 +102,7 @@ public class TeacherActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
 }

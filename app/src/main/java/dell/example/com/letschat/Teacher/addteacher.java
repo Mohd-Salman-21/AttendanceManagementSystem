@@ -41,8 +41,7 @@ public class addteacher extends AppCompatActivity implements AdapterView.OnItemS
         Tname=findViewById(R.id.teacherNameAddTeacher);
         Tid =  (EditText) findViewById(R.id.teacherIdAddTeacher);
         tpassword =  (EditText) findViewById(R.id.passwordAddTeacher);
-        mToolbar=(Toolbar)findViewById(R.id.ftoolbar);
-        setSupportActionBar(mToolbar);
+
         getSupportActionBar().setTitle("Add Teacher");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -83,18 +82,27 @@ public class addteacher extends AppCompatActivity implements AdapterView.OnItemS
         tname = Tname.getText().toString();
         tid = Tid.getText().toString();
         tpass = tpassword.getText().toString();
+         if(TextUtils.isEmpty(Tname.getText().toString()))
+         {
+             Toast.makeText(getApplicationContext(),"Teacher name cannot be empty", Toast.LENGTH_LONG).show();
+         }else if(TextUtils.isEmpty(Tid.getText().toString()))
+         {
+             Toast.makeText(getApplicationContext(),"Teacher id cannot be empty", Toast.LENGTH_LONG).show();
 
-        if (!(TextUtils.isEmpty(Tid.getText().toString()))) {
+         }else if(TextUtils.isEmpty(tpassword.getText().toString())){
+             Toast.makeText(getApplicationContext(),"Password cannot be empty", Toast.LENGTH_LONG).show();
+         }
+          else{
 
-            Teacher teacher =new Teacher(tname ,tid  ,"Select Course");
+            Teacher teacher =new Teacher(tname.toUpperCase() ,tid.toUpperCase()  ,"Select Course");
             databaseTeacher.child("Teacher").child("Department").child(departmentNameAddTeacher).child(tid).setValue(teacher);
-            databaseTeacher.child("Teacher").child("Logins").child(tid).setValue(tpass);
+            databaseTeacher.child("Teacher").child("Logins").child(tid.toUpperCase()).setValue(tpass);
             Toast.makeText(getApplicationContext(),"Teacher added successfully", Toast.LENGTH_LONG).show();
             finish();
 
-        }else {
-            Toast.makeText(getApplicationContext(),"fields cannot be empty", Toast.LENGTH_LONG).show();
         }
+
+
     }
 
 

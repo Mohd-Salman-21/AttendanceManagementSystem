@@ -3,6 +3,7 @@ package dell.example.com.letschat.Admin;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -25,7 +26,8 @@ public class AddCourse extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
-
+        getSupportActionBar().setTitle("Add Course");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         editTextCourseId=findViewById(R.id.course_id);
         editTextCourseName=findViewById(R.id.course_name);
 
@@ -35,7 +37,7 @@ public class AddCourse extends AppCompatActivity {
 
     public void addCourse(View view)
     {
-          courseId=editTextCourseId.getText().toString();
+          courseId=editTextCourseId.getText().toString().toUpperCase();
           courseName=editTextCourseName.getText().toString();
         if(TextUtils.isEmpty(courseId))
         {
@@ -57,12 +59,14 @@ public class AddCourse extends AppCompatActivity {
 
     }
 
-    public void removeCourse(View view)
-    {
-        courseId=editTextCourseId.getText().toString();
-        dbCourse.child("Attendance").child(courseId).setValue(null);
-        Toast.makeText(getApplicationContext(), "Course Removed successfully", Toast.LENGTH_LONG).show();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
+
 
 
 }

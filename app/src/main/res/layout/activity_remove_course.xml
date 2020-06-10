@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="dell.example.com.letschat.Admin.AddCourse"
+    tools:context=".RemoveCourse"
     android:background="#000">
 
     <LinearLayout
@@ -25,7 +25,7 @@
 
 
         <EditText
-            android:id="@+id/course_id"
+            android:id="@+id/course_id_remove_course"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -39,45 +39,32 @@
             app:layout_constraintVertical_bias="0.055"
             tools:layout_editor_absoluteX="8dp" />
 
-        <EditText
-            android:id="@+id/course_name"
+
+
+
+
+
+
+        <Button
+            android:id="@+id/button_remove_course"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="Course Name"
-            android:inputType="textPersonName"
-            android:layout_margin="10dp"
+            android:onClick="removeCourse"
+            android:layout_weight="1"
+            android:text="REMOVE"
+            android:background="@drawable/selector"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.055"
-            tools:layout_editor_absoluteX="8dp" />
-
-
-
-
-
-            <Button
-                android:id="@+id/button9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:onClick="addCourse"
-                android:layout_weight="1"
-                android:text="Add"
-                android:background="@drawable/selector"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.778"
-                app:layout_constraintHorizontal_bias="0.139" />
+            app:layout_constraintVertical_bias="0.778"
+            app:layout_constraintHorizontal_bias="0.139" />
 
 
 
