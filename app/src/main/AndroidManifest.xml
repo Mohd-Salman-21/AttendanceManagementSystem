@@ -19,8 +19,7 @@
             android:label="@string/title_activity_admin" />
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-           >
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,9 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity
-            android:name=".Teacher.teacherlogin"
-            />
+        <activity android:name=".Teacher.teacherlogin" />
         <activity android:name=".Student.addstudent" />
         <activity android:name=".Teacher.addteacher" />
         <activity android:name=".Attendance.admin_attendanceSheet" />
@@ -45,7 +42,8 @@
         <activity android:name=".Teacher.RemoveTeacher" />
         <activity android:name=".Teacher.AddCoursesTeacher" />
         <activity android:name=".RemoveCourse" />
-        <activity android:name=".Teacher.RemoveCoursesTeacher"></activity>
+        <activity android:name=".Teacher.RemoveCoursesTeacher" />
+        <activity android:name=".Teacher.StudentRecord"></activity>
     </application>
 
 </manifest>

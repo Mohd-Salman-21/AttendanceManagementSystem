@@ -38,6 +38,10 @@
         <item>IT</item>
         <item>ELECTRICAL</item>
         <item>MECHANICAL</item>
+        <item>CIVIL</item>
+        <item>ECE</item>
+        <item>CHEMICAL</item>
+        <item>METALLURGY</item>
     </array>
 
     <array name="course">

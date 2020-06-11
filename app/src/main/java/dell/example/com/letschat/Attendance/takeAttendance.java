@@ -125,12 +125,12 @@ public class takeAttendance extends AppCompatActivity implements AdapterView.OnI
         if (parent.getId() == R.id.attendanceSpinnerDepartment) {
             attenDepartmentName = parent.getItemAtPosition(position).toString();
 
-            Toast.makeText(getApplicationContext(), "department", Toast.LENGTH_LONG).show();
+
             courseSelection();
 
         } else if (parent.getId() == R.id.attendanceSpinnerSemester) {
             attenSemesterName = parent.getItemAtPosition(position).toString();
-            Toast.makeText(getApplicationContext(), "semester", Toast.LENGTH_LONG).show();
+
         }
 //       }else if(parent.getId()==R.id.attendanceSpinnerCourse)
 //       {

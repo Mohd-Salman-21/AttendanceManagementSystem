@@ -104,6 +104,17 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
     }
+
+    public void studentRecord(View v)
+    {
+        Bundle basket= new Bundle();
+
+        basket.putString("tid", message);
+
+        Intent intent = new Intent(this, StudentRecord.class);
+        intent.putExtras(basket);
+        startActivity(intent);
+    }
     public void takeAttendanceButton(View v){
         Bundle basket= new Bundle();
 

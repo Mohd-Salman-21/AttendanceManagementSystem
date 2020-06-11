@@ -1,85 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.admin.eattendance.studentlogin"
-    android:background="@drawable/recta">
-    <include
-        android:id="@+id/ftoolbar"
-        layout="@layout/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        tools:layout_editor_absoluteX="8dp"
-        />
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Welcome:id"
-        android:textSize="25dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginLeft="10dp"
-        android:textColor="#fff"
-        android:layout_below="@+id/ftoolbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.125"
-        tools:layout_editor_absoluteX="120dp" />
+    android:orientation="vertical"
+    tools:context="dell.example.com.letschat.Student.studentlogin"
+    android:background="@color/colorWhite">
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/ftoolbar"
-
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/bottom">
 
 
+        <android.support.v7.widget.CardView
 
-        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bottom"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:padding="15dp"
-            android:orientation="vertical">
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:onClick="viewAttendance"
+            app:cardBackgroundColor="#fff"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp"
 
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:onClick="viewAttendance"
 
-                android:text="View Attendance"
-                android:background="@drawable/button"
-                android:textAllCaps="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.644"
-                tools:layout_editor_absoluteX="8dp" />
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="match_parent"
+            app:cardMaxElevation="10dp"
+            app:contentPadding="25dp">
+
+            <TextView
+                android:id="@+id/card1student"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Logout"
-                android:textAllCaps="false"
-                android:onClick="logoutStudent"
-                android:background="@drawable/button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="8dp"
-                app:layout_constraintVertical_bias="0.371" />
-        </LinearLayout>
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:text="VIEW ATTENDANCE"
+                android:textColor="@color/colorBlack"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </android.support.v7.widget.CardView>
+
+
+
+
+        <!--<android.support.v7.widget.CardView-->
+
+
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginBottom="20dp"-->
+            <!--android:onClick="studentRecord"-->
+            <!--app:cardBackgroundColor="#fff"-->
+            <!--app:cardCornerRadius="10dp"-->
+            <!--app:cardElevation="8dp"-->
+
+
+            <!--app:cardMaxElevation="10dp"-->
+            <!--app:contentPadding="25dp">-->
+
+            <!--<TextView-->
+
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_vertical|center_horizontal"-->
+                <!--android:text="STUDENT RECORD"-->
+                <!--android:textColor="@color/colorBlack"-->
+                <!--android:textSize="24sp"-->
+                <!--android:textStyle="bold" />-->
+        <!--</android.support.v7.widget.CardView>-->
+
+
+
+        <android.support.v7.widget.CardView
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:onClick="changepasswordTeacher"
+            app:cardBackgroundColor="#fff"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp"
+
+
+            app:cardMaxElevation="10dp"
+            app:contentPadding="25dp">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:text="CHANGE PASSWORD"
+                android:textColor="@color/colorBlack"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </android.support.v7.widget.CardView>
+
+
+        <!--<Button-->
+        <!--android:id="@+id/button6"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:onClick="takeAttendanceButton"-->
+        <!--android:text="Take attendance"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="0.364"-->
+        <!--android:background="@drawable/loginselector"-->
+        <!--android:textColor="#000000"-->
+        <!--tools:layout_editor_absoluteX="8dp" />-->
+
+        <!--<Button-->
+        <!--android:id="@+id/button7"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:onClick="previous_records"-->
+        <!--android:text=""-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--android:background="@drawable/loginselector"-->
+        <!--app:layout_constraintVertical_bias="0.626"-->
+        <!--android:padding="10dp"-->
+        <!--android:textColor="#000000"-->
+        <!--tools:layout_editor_absoluteX="8dp" />-->
+
     </LinearLayout>
-</RelativeLayout>
+
+
+
+
+</LinearLayout>

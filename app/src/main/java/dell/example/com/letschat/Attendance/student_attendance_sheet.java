@@ -1,8 +1,8 @@
 package dell.example.com.letschat.Attendance;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,7 +34,7 @@ public class student_attendance_sheet extends AppCompatActivity implements  Adap
 
     public static int TOC = 1, NOP = 1, NOA = 1;
     float average = (float) 0.0;
-    TextView t;
+    TextView t,one;
     String avg, p1, p2, p3, p4, p5, p6, p7, p8;
     String student_id;
     ArrayList dates = new ArrayList<>();
@@ -47,14 +47,17 @@ public class student_attendance_sheet extends AppCompatActivity implements  Adap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_attendance_sheet);
 
-        t = (TextView) findViewById(R.id.textView3);
 
         listView = (ListView) findViewById(R.id.list);
          course = findViewById(R.id.student_course_id);
 
         Bundle bundle = getIntent().getExtras();
         student_id = bundle.getString("sid");
-        t.setText(student_id);
+
+        getSupportActionBar().setTitle(student_id);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
         dates.clear();
         dates.add("       Date          " + "p1  " + "p2  " + "p3  " + "p4   " + "p5   " + "p6  " + "p7  " + "p8");
@@ -82,6 +85,9 @@ public class student_attendance_sheet extends AppCompatActivity implements  Adap
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         semester.setAdapter(adapter2);
+
+
+//        one =findViewById(R.id.record5);
 
 
 
@@ -116,19 +122,19 @@ public class student_attendance_sheet extends AppCompatActivity implements  Adap
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                     p1 = dsp.child(student_id).child("p1").getValue().toString().substring(0, 1);
 
-                    dates.add(dsp.getKey() + "    " + p1 + "     "); //add result into array list
+                    dates.add(dsp.getKey() + "                                " + p1 + "     "); //add result into array list
 
 
-                    //  Toast.makeText(getApplicationContext(),dsp.child(student_id).child("p1").getValue().toString(),Toast.LENGTH_LONG).show();
-                    if (p1.equals("P")) {
-
-                        NOP++;
-                        TOC++;
-                    }
-                    if(p1.equals("A")) {
-                        NOA++;
-                        TOC++;
-                    }
+//                    //  Toast.makeText(getApplicationContext(),dsp.child(student_id).child("p1").getValue().toString(),Toast.LENGTH_LONG).show();
+//                    if (p1.equals("P")) {
+//
+//                        NOP++;
+//                        TOC++;
+//                    }
+//                    if(p1.equals("A")) {
+//                        NOA++;
+//                        TOC++;
+//                    }
 
 
 
@@ -136,7 +142,7 @@ public class student_attendance_sheet extends AppCompatActivity implements  Adap
 
 
                 }
-                list(dates,NOP,TOC,NOA);
+                list(dates);
 
 
                 //  Toast.makeText(getApplicationContext(), dates.toString(), Toast.LENGTH_LONG).show();
@@ -201,22 +207,32 @@ public class student_attendance_sheet extends AppCompatActivity implements  Adap
 //
 //    }
 
-    public void list(ArrayList studentlist, int NOP, int TOC, int NOA){
+    public void list(ArrayList studentlist){
         // Toast.makeText(this,NOP+TOC,Toast.LENGTH_LONG).show();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, studentlist);
         // Assign adapter to ListView
         listView.setAdapter(adapter);
-        try {
+//        try {
+//
+//            average =(float)((NOP*100)/TOC);
+//            String avg=Float.toString(average);
+//            t.setText("Your Attendance is :"+avg+"%");
+//            one.setText("20");
+//            if(average>=75)
+//                t.setTextColor(Color.GREEN);
+//            if(average<75)
+//                t.setTextColor(Color.RED);
+//        }
+//        catch (Exception e){e.printStackTrace();}
+    }
 
-            average =(float)((NOP*100)/TOC);
-            String avg=Float.toString(average);
-            t.setText("Your Attendance is :"+avg+"%");
-            if(average>=75)
-                t.setTextColor(Color.GREEN);
-            if(average<75)
-                t.setTextColor(Color.RED);
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
         }
-        catch (Exception e){e.printStackTrace();}
+        return super.onOptionsItemSelected(item);
     }
 //
 }
