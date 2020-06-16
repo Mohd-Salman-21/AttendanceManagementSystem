@@ -60,9 +60,9 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
         // Spinner Drop down elements
         List<String> categories = new ArrayList<String>();
-        categories.add("Admin");
-        categories.add("Teacher");
-        categories.add("Student");
+        categories.add("ADMIN");
+        categories.add("TEACHER");
+        categories.add("STUDENT");
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, categories);
@@ -97,8 +97,8 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     public void onButtonClick(View v) {
 
 
-        userid = username.getText().toString();
-        pass = password.getText().toString();
+        userid = username.getText().toString().trim();
+        pass = password.getText().toString().trim();
 
         if (TextUtils.isEmpty(userid)) {
             Toast.makeText(getApplicationContext(), "User Id cannot be empty", Toast.LENGTH_LONG).show();

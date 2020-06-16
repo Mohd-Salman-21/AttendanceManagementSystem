@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,9 +14,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,6 +37,8 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
     String message;
     Toolbar mToolbar;
     DatabaseReference dbadmin;
+    Button button;
+   private FirebaseAuth mAuth;
     DatabaseReference ref;
     private static long back_pressed;
     String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
@@ -41,10 +48,15 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_teacherlogin);
         //Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
 
+        mAuth=FirebaseAuth.getInstance();
+
 
         //to get username from login page
         Bundle bundle1 = getIntent().getExtras();
         message = bundle1.getString("message");
+
+
+        button=findViewById(R.id.email);
 
 
 
@@ -70,6 +82,25 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
 //
 //        // attaching data adapter to spinner
 //        spinner2.setAdapter(dataAdapter);
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.sendPasswordResetEmail("shanumalik16009@gmail.com")
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(teacherlogin.this,"send",Toast.LENGTH_LONG).show();
+                                }
+                                else
+                                    Toast.makeText(teacherlogin.this,"not send",Toast.LENGTH_LONG).show();
+
+                            }
+                        });
+            }
+        });
     }
 
     @Override
@@ -115,6 +146,17 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
         intent.putExtras(basket);
         startActivity(intent);
     }
+
+    public void classRecord(View v)
+    {
+        Bundle basket= new Bundle();
+
+        basket.putString("tid", message);
+        Intent intent = new Intent(this, ClassRecord.class);
+        intent.putExtras(basket);
+        startActivity(intent);
+    }
+
     public void takeAttendanceButton(View v){
         Bundle basket= new Bundle();
 
@@ -183,6 +225,11 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
             back_pressed = System.currentTimeMillis();
         }
     }
+
+
+
+
+
 
 
 }

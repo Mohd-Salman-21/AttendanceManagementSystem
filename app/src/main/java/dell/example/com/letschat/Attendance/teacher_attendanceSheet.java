@@ -61,7 +61,7 @@ public class teacher_attendanceSheet extends AppCompatActivity implements  Adapt
         listView = (ListView) findViewById(R.id.list);
         date = (EditText) findViewById(R.id.date);
 
-        getSupportActionBar().setTitle("Previous Record");
+        getSupportActionBar().setTitle("COURSE RECORD");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle bundle1 = getIntent().getExtras();
 //        class_selected = bundle1.getString("class_selected");
@@ -222,7 +222,7 @@ public class teacher_attendanceSheet extends AppCompatActivity implements  Adapt
     public void display_list(final ArrayList userlist) {
 
         Studentlist.clear();
-        required_date = date.getText().toString();
+        required_date = date.getText().toString().trim();
         dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseIdName);
         Studentlist.add(" Enrollment                 ");
         for (Object sid : userlist) {

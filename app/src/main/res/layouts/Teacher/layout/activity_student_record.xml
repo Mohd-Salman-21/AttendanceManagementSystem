@@ -5,22 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dell.example.com.letschat.Teacher.StudentRecord"
-    >
-
-
-
-
-
-
+    android:scrollbars="vertical"
+    tools:context="dell.example.com.letschat.Teacher.StudentRecord">
 
 
     <Spinner
 
         android:id="@+id/studendRecordSpinnerDepartment"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:entries="@array/department"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,11 +27,16 @@
         tools:layout_editor_absoluteX="8dp" />
 
     <Spinner
-        android:layout_below="@+id/studendRecordSpinnerDepartment"
         android:id="@+id/studentRecordSpinnerSemester"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/studendRecordSpinnerDepartment"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:entries="@array/semester"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -40,67 +44,81 @@
         tools:layout_editor_absoluteX="8dp" />
 
     <Spinner
-        android:layout_below="@+id/studentRecordSpinnerSemester"
         android:id="@+id/studentRecordSpinnerCourse"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_margin="10dp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.431"
-        tools:layout_editor_absoluteX="8dp" />
-
-    <EditText
-        android:id="@+id/studentRecordenroll"
-        android:layout_width="327dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/studentRecordSpinnerCourse"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="    Enrollment:   Eg:   CSE-385-16"
-        android:selectAllOnFocus="false"
-        android:singleLine="false"
-        android:textColorHint="@color/colorBlack"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.017" />
+        android:layout_below="@+id/studentRecordSpinnerSemester"
 
-    <Button
-        android:id="@+id/studentRecordButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/studentRecordenroll"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/loginselector"
-        android:text="SHOW"
-        android:onClick="studentRecordCalculate"
-        android:textColor="#000" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.431"
+        tools:layout_editor_absoluteX="8dp" />
 
+    <LinearLayout
+        android:id="@+id/linear_student_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/studentRecordSpinnerCourse"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/studentRecordenroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="@dimen/dimen_32x"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="Enroll:   CSE-385-16"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:textColorHint="@color/colorBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.017" />
+
+        <Button
+            android:id="@+id/studentRecordButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/loginselector"
+            android:onClick="studentRecordCalculate"
+            android:text="SHOW"
+            android:textColor="#000" />
+
+
+    </LinearLayout>
 
 
     <android.support.v7.widget.CardView
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/studentRecordButton"
+        android:layout_below="@+id/linear_student_record"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="32dp"
         android:layout_marginRight="20dp"
@@ -236,36 +254,18 @@
     </android.support.v7.widget.CardView>
 
 
-
-
-
-
-
     <!--<Button-->
-        <!--android:layout_below="@+id/attenButton"-->
-        <!--android:id="@+id/btshow"-->
+    <!--android:layout_below="@+id/attenButton"-->
+    <!--android:id="@+id/btshow"-->
 
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="10dp"-->
-        <!--android:background="@drawable/selector"-->
-        <!--android:onClick="showSelectedItems"-->
-        <!--android:padding="10dp"-->
-        <!--android:text="Submit"-->
-        <!--android:textColor="#000" />-->
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:background="@drawable/selector"-->
+    <!--android:onClick="showSelectedItems"-->
+    <!--android:padding="10dp"-->
+    <!--android:text="Submit"-->
+    <!--android:textColor="#000" />-->
 
 
 </RelativeLayout>

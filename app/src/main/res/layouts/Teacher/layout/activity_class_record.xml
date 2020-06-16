@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:padding="10dp"
+    tools:context=".Teacher.ClassRecord">
+
+    <Spinner
+        android:backgroundTint="@color/colorWhite"
+        android:id="@+id/classRecordSpinnerDepartment"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:entries="@array/department"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.431"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <Spinner
+        android:id="@+id/classRecordSpinnerSemester"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/classRecordSpinnerDepartment"
+        android:layout_margin="10dp"
+        android:entries="@array/semester"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.431"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <Spinner
+        android:id="@+id/classRecordSpinnerCourse"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/classRecordSpinnerSemester"
+        android:layout_margin="10dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.431"
+        tools:layout_editor_absoluteX="8dp" />
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/classRecordSpinnerCourse"
+
+        android:background="@drawable/loginselector"
+        android:onClick="viewlistClassRecord"
+
+        android:text="SHOW" />
+
+
+</RelativeLayout>
+
+

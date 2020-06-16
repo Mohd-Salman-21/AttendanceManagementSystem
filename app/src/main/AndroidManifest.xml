@@ -43,7 +43,9 @@
         <activity android:name=".Teacher.AddCoursesTeacher" />
         <activity android:name=".RemoveCourse" />
         <activity android:name=".Teacher.RemoveCoursesTeacher" />
-        <activity android:name=".Teacher.StudentRecord"></activity>
+        <activity android:name=".Teacher.StudentRecord" />
+        <activity android:name=".Teacher.ClassRecord" />
+        <activity android:name=".Teacher.ClassRecordDisplay"></activity>
     </application>
 
 </manifest>
