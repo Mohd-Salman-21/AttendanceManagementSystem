@@ -69,8 +69,9 @@ public class RemoveTeacher extends AppCompatActivity  implements AdapterView.OnI
 
     public void removeTeacherButton(View v){
         if (!TextUtils.isEmpty(Tid.getText().toString())) {
-            tid = Tid.getText().toString().toLowerCase();
+            tid = Tid.getText().toString().toLowerCase().trim();
             databaseTeacher.child("Teacher").child("Department").child(departmentName).child(tid).setValue(null);
+            databaseTeacher.child("Teacher").child("Logins").child(tid).setValue(null);
             Toast.makeText(getApplicationContext(),"Teacher removed successfully", Toast.LENGTH_LONG).show();
             finish();
 

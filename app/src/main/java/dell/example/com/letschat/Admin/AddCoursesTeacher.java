@@ -153,13 +153,11 @@ public class AddCoursesTeacher extends AppCompatActivity implements  AdapterView
 
 
     public  void addCourseToTeacher(View view) {
-        String id = techerId.getText().toString();
+        String id = techerId.getText().toString().toLowerCase().trim();
 
-        if (TextUtils.isEmpty(id)) {
+        if (TextUtils.isEmpty(id))
             Toast.makeText(getApplicationContext(), "Teacher id cannot be empty", Toast.LENGTH_LONG).show();
-        } else if (TextUtils.isEmpty(courseIdName)) {
-            Toast.makeText(getApplicationContext(), "Course code cannot be empty", Toast.LENGTH_LONG).show();
-        } else {
+       else {
             //list.add(courseCodeName);
             databaseReference.child("Teacher").child("Department").child(departmentName).child(id).child("courses").child(courseIdName).setValue(courseIdName);
             Toast.makeText(getApplicationContext(), "Course Added Successfully", Toast.LENGTH_LONG).show();

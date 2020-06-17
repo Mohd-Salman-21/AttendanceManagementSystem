@@ -93,9 +93,9 @@ public class addstudent extends AppCompatActivity implements AdapterView.OnItemS
            }
            else {
             //String id = databaseStudent.push().getKey();
-            sname = Sname.getText().toString();
-            sid = Sid.getText().toString();
-            spass = spassword.getText().toString();
+            sname = Sname.getText().toString().trim();
+            sid = Sid.getText().toString().toLowerCase().trim();
+            spass = spassword.getText().toString().trim();
 
             Student student =new Student(sname ,sid );
             databaseStudent.child("Department").child(departmentName).child("Semester").child(semesterName).child(sid).setValue(student);

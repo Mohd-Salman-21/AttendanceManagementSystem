@@ -1,8 +1,5 @@
 package dell.example.com.letschat.UtilityClasses;
 
-/**
- * Created by admin on 8/2/2018.
- */
 
 public class Teacher {
     String tname;

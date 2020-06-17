@@ -3,6 +3,7 @@ package dell.example.com.letschat.Teacher;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -173,57 +174,60 @@ public class StudentRecord extends AppCompatActivity implements AdapterView.OnIt
 
         present=total=absent=0;
         percent=(float)0.0;
-        enroll = editText.getText().toString().toUpperCase().trim();
+        enroll = editText.getText().toString().toLowerCase().trim();
+
+        if(TextUtils.isEmpty(enroll))
+            Toast.makeText(getApplicationContext(),"Enrollment cannot be empty",Toast.LENGTH_LONG).show();
+          else {
+
+            dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseIdName);
+            dbAttendance.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                        p1 = dsp.child(enroll).child("p1").getValue().toString().substring(0, 1);
+
+                        if (p1.equals("A")) {
+                            absent++;
+                        } else
+                            present++;
+
+                    }
+
+                    total = absent + present;
+                    String onem = Integer.toString(total);
+                    one.setText(onem);
+                    one.setTextColor(Color.BLACK);
+//
+                    String twom = Integer.toString(present);
+                    two.setText(twom);
+                    two.setTextColor(Color.GREEN);
+
+                    String threem = Integer.toString(absent);
+                    three.setText(threem);
+                    three.setTextColor(Color.RED);
+
+                    percent = (float) ((present * 100) / total);
+                    String fourm = Float.toString(percent);
+                    four.setText(fourm + " %");
+                    if (percent >= 75)
+                        four.setTextColor(Color.GREEN);
+                    if (percent < 75)
+                        four.setTextColor(Color.RED);
 
 
-        dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseIdName);
-        dbAttendance.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    p1 = dsp.child(enroll).child("p1").getValue().toString().substring(0, 1);
+                    //Toast.makeText(getApplicationContext(), dates.toString(), Toast.LENGTH_LONG).show();
 
-                    if(p1.equals("A")){
-                        absent++;
-                    }else
-                        present++;
 
                 }
 
-                total = absent + present;
-                String onem=Integer.toString(total);
-                one.setText(onem);
-                one.setTextColor(Color.BLACK);
-//
-                String twom=Integer.toString(present);
-                two.setText(twom);
-                two.setTextColor(Color.GREEN);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_LONG).show();
+                }
+            });
 
-                String threem=Integer.toString(absent);
-                three.setText(threem);
-                three.setTextColor(Color.RED);
-
-                percent = (float)((present*100)/total);
-                String fourm = Float.toString(percent);
-                four.setText(fourm+" %");
-                if(percent>=75)
-                    four.setTextColor(Color.GREEN);
-                if(percent<75)
-                    four.setTextColor(Color.RED);
-
-
-                //Toast.makeText(getApplicationContext(), dates.toString(), Toast.LENGTH_LONG).show();
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_LONG).show();
-            }
-        });
-
-
+        }
     }
 
 

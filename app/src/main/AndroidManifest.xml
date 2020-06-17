@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name="dell.example.com.letschat.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,24 +21,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Teacher.teacherlogin" />
-        <activity android:name=".Admin.addstudent" />
-        <activity android:name=".Admin.addteacher" />
-        <activity android:name=".Admin.adminlogin" />
-        <activity android:name=".Student.student_attendance_sheet" />
-        <activity android:name=".Student.studentlogin" />
-        <activity android:name=".Teacher.takeAttendance" />
-        <activity android:name=".Teacher.teacher_attendanceSheet" />
-        <activity android:name=".Admin.AddCourse" />
-        <activity android:name=".Admin.RemoveStudent" />
-        <activity android:name=".Admin.RemoveTeacher" />
-        <activity android:name=".Admin.AddCoursesTeacher" />
-        <activity android:name=".Admin.RemoveCourse" />
-        <activity android:name=".Admin.RemoveCoursesTeacher" />
-        <activity android:name=".Teacher.StudentRecord" />
-        <activity android:name=".Teacher.ClassRecord" />
-        <activity android:name=".Teacher.ClassRecordDisplay" />
-        <activity android:name=".Student.CourseRecord"></activity>
+        <activity android:name="dell.example.com.letschat.Teacher.teacherlogin" />
+        <activity android:name="dell.example.com.letschat.Admin.addstudent" />
+        <activity android:name="dell.example.com.letschat.Admin.addteacher" />
+        <activity android:name="dell.example.com.letschat.Admin.adminlogin" />
+        <activity android:name="dell.example.com.letschat.Student.student_attendance_sheet" />
+        <activity android:name="dell.example.com.letschat.Student.studentlogin" />
+        <activity android:name="dell.example.com.letschat.Teacher.takeAttendance" />
+        <activity android:name="dell.example.com.letschat.Teacher.teacher_attendanceSheet" />
+        <activity android:name="dell.example.com.letschat.Admin.AddCourse" />
+        <activity android:name="dell.example.com.letschat.Admin.RemoveStudent" />
+        <activity android:name="dell.example.com.letschat.Admin.RemoveTeacher" />
+        <activity android:name="dell.example.com.letschat.Admin.AddCoursesTeacher" />
+        <activity android:name="dell.example.com.letschat.Admin.RemoveCourse" />
+        <activity android:name="dell.example.com.letschat.Admin.RemoveCoursesTeacher" />
+        <activity android:name="dell.example.com.letschat.Teacher.StudentRecord" />
+        <activity android:name="dell.example.com.letschat.Teacher.ClassRecord" />
+        <activity android:name="dell.example.com.letschat.Teacher.ClassRecordDisplay" />
+        <activity android:name="dell.example.com.letschat.Student.CourseRecord"></activity>
     </application>
 
 </manifest>

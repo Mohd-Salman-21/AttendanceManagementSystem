@@ -83,10 +83,11 @@ public class RemoveStudent extends AppCompatActivity implements AdapterView.OnIt
     }
     public void removeStudent(View v){
         if (!TextUtils.isEmpty(Sid.getText().toString())) {
-            sid = Sid.getText().toString().toUpperCase();
+            sid = Sid.getText().toString().toLowerCase().trim();
 
 
             databaseStudent.child("Department").child(removeDepartmentName).child("Semester").child(removeSemesterName).child(sid).setValue(null);
+            databaseStudent.child("Logins").child(sid).setValue(null);
             Toast.makeText(getApplicationContext(),"Student removed successfully", Toast.LENGTH_LONG).show();
 
         }else {

@@ -11,8 +11,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import dell.example.com.letschat.R;
 
@@ -22,6 +28,41 @@ public class RemoveCoursesTeacher extends AppCompatActivity implements AdapterVi
     String courseCodeName,departmentName;
     Spinner department;
     DatabaseReference databaseReference;
+
+
+
+
+
+
+    Spinner courseId;
+    String courseIdName;
+
+
+
+
+
+
+
+
+
+
+    String teacher_id,class_selected;
+
+
+    EditText date;
+    ArrayList Userlist = new ArrayList<>();
+    ArrayList Studentlist = new ArrayList<>();
+
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference dbAttendance;
+    DatabaseReference dbStudent,courses;
+    String required_date;
+
+
+    ArrayList<String> list=new ArrayList<>();
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +75,7 @@ public class RemoveCoursesTeacher extends AppCompatActivity implements AdapterVi
 
 
         techerId=findViewById(R.id.teacher_id_remove_course_teacher);
-        courseCode=findViewById(R.id.course_code_removeCourseTeacher);
+
 
         databaseReference=FirebaseDatabase.getInstance().getReference();
 
@@ -67,16 +108,72 @@ public class RemoveCoursesTeacher extends AppCompatActivity implements AdapterVi
     }
 
 
-    public  void removeCourseToTeacher(View view) {
-        String id = techerId.getText().toString();
-        courseCodeName = courseCode.getText().toString().toUpperCase();
-        if (TextUtils.isEmpty(id)) {
+    public void courseSelectionAdminRemoveCourse(View view) {
+
+        String id = techerId.getText().toString().toLowerCase().trim();
+
+        if(TextUtils.isEmpty(id))
+        {
             Toast.makeText(getApplicationContext(), "Teacher id cannot be empty", Toast.LENGTH_LONG).show();
-        } else if (TextUtils.isEmpty(courseCodeName)) {
-            Toast.makeText(getApplicationContext(), "Course code cannot be empty", Toast.LENGTH_LONG).show();
-        } else {
+        }else {
+
+            courses = ref.child("Teacher").child("Department").child(departmentName).child(id).child("courses");
+            courses.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // Is better to use a List, because you don't know the size
+                    // of the iterator returned by dataSnapshot.getChildren() to
+                    // initialize the array
+                    List<String> areas = new ArrayList<String>();
+
+                    for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
+                        String areaName = areaSnapshot.getValue(String.class);
+                        areas.add(areaName);
+                    }
+
+                    courseId = findViewById(R.id.spinner_courses_teacher_remove_course);
+
+
+                    ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(RemoveCoursesTeacher.this, android.R.layout.simple_spinner_item, areas);
+                    areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    courseId.setAdapter(areasAdapter);
+                    courseId.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            courseIdName = adapterView.getItemAtPosition(i).toString();
+
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(getApplicationContext(), "something wrong with courseid", Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }
+
+    }
+
+
+    public  void removeCourseToTeacher(View view) {
+        String id = techerId.getText().toString().toLowerCase().trim();
+
+        if (TextUtils.isEmpty(id))
+            Toast.makeText(getApplicationContext(), "Teacher id cannot be empty", Toast.LENGTH_LONG).show();
+
+        else {
             //list.add(courseCodeName);
-            databaseReference.child("Teacher").child("Department").child(departmentName).child(id).child("courses").child(courseCodeName).setValue(null);
+            databaseReference.child("Teacher").child("Department").child(departmentName).child(id).child("courses").child(courseIdName).setValue(null);
             Toast.makeText(getApplicationContext(), "Course Removed Successfully", Toast.LENGTH_LONG).show();
         }
     }

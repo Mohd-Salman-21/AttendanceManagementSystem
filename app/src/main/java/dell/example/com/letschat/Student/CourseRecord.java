@@ -23,6 +23,8 @@ import java.util.ArrayList;
 
 import dell.example.com.letschat.R;
 
+
+
 public class CourseRecord extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
 

@@ -2,6 +2,7 @@ package dell.example.com.letschat.Teacher;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -223,6 +224,10 @@ public class teacher_attendanceSheet extends AppCompatActivity implements  Adapt
 
         Studentlist.clear();
         required_date = date.getText().toString().trim();
+
+        if(TextUtils.isEmpty(required_date))
+            Toast.makeText(getApplicationContext(),"Date cannot be empty",Toast.LENGTH_LONG).show();
+        else{
         dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseIdName);
         Studentlist.add(" Enrollment                 ");
         for (Object sid : userlist) {
@@ -232,11 +237,11 @@ public class teacher_attendanceSheet extends AppCompatActivity implements  Adapt
                     // Result will be holded Here
 
                     //DataSnapshot dsp=dataSnapshot.child(sid.toString());
-                    for(DataSnapshot dsp : dataSnapshot.getChildren()) {
+                    for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                         String p1 = dsp.getValue().toString();
                         //Toast.makeText(getApplicationContext(),p1,Toast.LENGTH_LONG).show();
-                        if((p1.equals("A"))||(p1.equals("P"))){
-                            Studentlist.add(dataSnapshot.getKey().toString() + "                 " + p1.substring(0,1));
+                        if ((p1.equals("A")) || (p1.equals("P"))) {
+                            Studentlist.add(dataSnapshot.getKey().toString() + "                 " + p1.substring(0, 1));
                         }
                     }
                   /*  String p2=dataSnapshot.child(sid.toString()).child("p2").getValue().toString().substring(0,1);
@@ -249,8 +254,9 @@ public class teacher_attendanceSheet extends AppCompatActivity implements  Adapt
                 */
                     //  Studentlist.add(dataSnapshot.getKey().toString() + "    " + p1); //add result into array list
 
-
-                    //Toast.makeText(getApplicationContext(),Studentlist.toString(), Toast.LENGTH_LONG).show();
+                    if(Studentlist.isEmpty())
+                    Toast.makeText(getApplicationContext(),"Inputs wrong", Toast.LENGTH_LONG).show();
+                    else
                     list(Studentlist);
 
                 }
@@ -262,7 +268,7 @@ public class teacher_attendanceSheet extends AppCompatActivity implements  Adapt
                 }
 
             });
-
+        }
 
         }
 
@@ -301,7 +307,7 @@ public class teacher_attendanceSheet extends AppCompatActivity implements  Adapt
 
 
 
-//package dell.example.com.letschat.Attendance;
+//package dell.example.com.AttendanceManagement.Attendance;
 //
 //import android.os.Bundle;
 //import android.support.v7.app.AppCompatActivity;
@@ -323,7 +329,7 @@ public class teacher_attendanceSheet extends AppCompatActivity implements  Adapt
 //import java.util.ArrayList;
 //import java.util.List;
 //
-//import dell.example.com.letschat.R;
+//import dell.example.com.AttendanceManagement.R;
 //
 //
 //public class teacher_attendanceSheet extends AppCompatActivity implements  AdapterView.OnItemSelectedListener{

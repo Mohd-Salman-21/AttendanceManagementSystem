@@ -79,9 +79,9 @@ public class addteacher extends AppCompatActivity implements AdapterView.OnItemS
         // TODO Auto-generated method stub
     }
     public void addTeacher(View v){
-        tname = Tname.getText().toString();
-        tid = Tid.getText().toString();
-        tpass = tpassword.getText().toString();
+        tname = Tname.getText().toString().trim();
+        tid = Tid.getText().toString().trim();
+        tpass = tpassword.getText().toString().trim();
          if(TextUtils.isEmpty(Tname.getText().toString()))
          {
              Toast.makeText(getApplicationContext(),"Teacher name cannot be empty", Toast.LENGTH_LONG).show();
@@ -94,9 +94,9 @@ public class addteacher extends AppCompatActivity implements AdapterView.OnItemS
          }
           else{
 
-            Teacher teacher =new Teacher(tname.toUpperCase() ,tid.toUpperCase()  ,"Select Course");
-            databaseTeacher.child("Teacher").child("Department").child(departmentNameAddTeacher).child(tid).setValue(teacher);
-            databaseTeacher.child("Teacher").child("Logins").child(tid.toUpperCase()).setValue(tpass);
+            Teacher teacher =new Teacher(tname.toUpperCase() ,tid.toLowerCase()  ,"Select Course");
+            databaseTeacher.child("Teacher").child("Department").child(departmentNameAddTeacher).child(tid.toLowerCase()).setValue(teacher);
+            databaseTeacher.child("Teacher").child("Logins").child(tid.toLowerCase()).setValue(tpass);
             Toast.makeText(getApplicationContext(),"Teacher added successfully", Toast.LENGTH_LONG).show();
             finish();
 
