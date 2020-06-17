@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import dell.example.com.letschat.PreviousActivities.adminlogin;
+import dell.example.com.letschat.Admin.adminlogin;
 import dell.example.com.letschat.Student.studentlogin;
 import dell.example.com.letschat.Teacher.teacherlogin;
 
@@ -60,9 +60,9 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
         // Spinner Drop down elements
         List<String> categories = new ArrayList<String>();
-        categories.add("ADMIN");
-        categories.add("TEACHER");
-        categories.add("STUDENT");
+        categories.add("Admin");
+        categories.add("Teacher");
+        categories.add("Student");
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, categories);

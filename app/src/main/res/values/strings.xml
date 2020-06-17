@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LetsChat</string>
+    <string name="app_name">Attendance Management</string>
     <string name="invalid_email">Your email is invalid</string>
     <string name="invalid_password">Your password is too short</string>
     <string name="incorrect_password">Your password is not correct</string>

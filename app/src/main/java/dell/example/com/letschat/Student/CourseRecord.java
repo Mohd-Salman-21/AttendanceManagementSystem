@@ -1,4 +1,4 @@
-package dell.example.com.letschat.Teacher;
+package dell.example.com.letschat.Student;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,26 +20,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import dell.example.com.letschat.R;
 
-public class StudentRecord extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class CourseRecord extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
 
     Spinner semester,department,courseId;
     String semesterName,departmentName,courseIdName;
     ArrayList dates = new ArrayList<>();
-    String teacher_id,enroll,p1
+    String student_id,courseName,p1
             ;
     public  int absent=0,present=0,total=0;
     float percent=(float) 0.0;
     ListView listView;
-    EditText date,editText;
+    EditText date,course;
 
     TextView one,two,three,four;
-
-
 
 
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -47,21 +44,31 @@ public class StudentRecord extends AppCompatActivity implements AdapterView.OnIt
     DatabaseReference dbStudent,courses;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_record);
+        setContentView(R.layout.activity_course_record);
 
-        getSupportActionBar().setTitle("Student Record");
+
+
+
+        course = findViewById(R.id.courseRecord_courscode);
+
+        Bundle bundle = getIntent().getExtras();
+        student_id = bundle.getString("sid");
+
+        getSupportActionBar().setTitle(student_id);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Bundle bundle1 = getIntent().getExtras();
-
-        teacher_id = bundle1.getString("tid");
 
 
-         editText=findViewById(R.id.studentRecordenroll);
-        department = findViewById(R.id.studendRecordSpinnerDepartment);
+        dates.clear();
+        dates.add("       Date          " + "p1  " + "p2  " + "p3  " + "p4   " + "p5   " + "p6  " + "p7  " + "p8");
+
+
+        department = findViewById(R.id.courseRecordSpinnerDepartment);
 
         department.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
 // Create an ArrayAdapter using the string array and a default spinner layout
@@ -73,7 +80,7 @@ public class StudentRecord extends AppCompatActivity implements AdapterView.OnIt
         department.setAdapter(adapter);
 
 
-        semester = findViewById(R.id.studentRecordSpinnerSemester);
+        semester = findViewById(R.id.courseRecordSpinnerSemester);
 
         semester.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
 // Create an ArrayAdapter using the string array and a default spinner layout
@@ -85,30 +92,27 @@ public class StudentRecord extends AppCompatActivity implements AdapterView.OnIt
         semester.setAdapter(adapter2);
 
 
-
-         one=findViewById(R.id.record5teacher);
-         two=findViewById(R.id.record6teacher);
-
-         three=findViewById(R.id.record7teacher);
-
-         four=findViewById(R.id.record8teacher);
+//        one =findViewById(R.id.record5);
 
 
+        one=findViewById(R.id.record5);
+        two=findViewById(R.id.record6);
+
+        three=findViewById(R.id.record7);
+
+        four=findViewById(R.id.record8);
 
 
 
 
     }
-
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        if(adapterView.getId()==R.id.studendRecordSpinnerDepartment)
-        {
-            departmentName=adapterView.getItemAtPosition(i).toString();
-            courseSelectionStudentRecord();
-        }else if(adapterView.getId()==R.id.studentRecordSpinnerSemester)
-        {
-            semesterName=adapterView.getItemAtPosition(i).toString();
+        if (adapterView.getId() == R.id.courseRecordSpinnerDepartment) {
+            departmentName = adapterView.getItemAtPosition(i).toString();
+
+        } else if (adapterView.getId() == R.id.courseRecordSpinnerSemester) {
+            semesterName = adapterView.getItemAtPosition(i).toString();
         }
     }
 
@@ -119,69 +123,21 @@ public class StudentRecord extends AppCompatActivity implements AdapterView.OnIt
 
 
 
-    public void courseSelectionStudentRecord() {
-
-        courses=ref.child("Teacher");
-        courses.child("Department").child(departmentName).child(teacher_id).child("courses").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Is better to use a List, because you don't know the size
-                // of the iterator returned by dataSnapshot.getChildren() to
-                // initialize the array
-                List<String> areas = new ArrayList<String>();
-
-                for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
-                    String areaName = areaSnapshot.getValue(String.class);
-                    areas.add(areaName);
-                }
-
-                courseId = findViewById(R.id.studentRecordSpinnerCourse);
 
 
-                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, areas);
-                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                courseId.setAdapter(areasAdapter);
-                courseId.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        courseIdName = adapterView.getItemAtPosition(i).toString();
-
-
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "something wrong with courseid", Toast.LENGTH_LONG).show();
-
-            }
-        });
-
-
-    }
-
-
-    public void studentRecordCalculate(View v) {
+    public void courseRecordCalculate(View v) {
 
         present=total=absent=0;
         percent=(float)0.0;
-        enroll = editText.getText().toString().toUpperCase().trim();
+        courseName = course.getText().toString().toUpperCase().trim();
 
 
-        dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseIdName);
+        dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseName);
         dbAttendance.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    p1 = dsp.child(enroll).child("p1").getValue().toString().substring(0, 1);
+                    p1 = dsp.child(student_id).child("p1").getValue().toString().substring(0, 1);
 
                     if(p1.equals("A")){
                         absent++;
@@ -239,5 +195,4 @@ public class StudentRecord extends AppCompatActivity implements AdapterView.OnIt
     }
 
 
-                }
-
+}

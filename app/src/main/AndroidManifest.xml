@@ -12,11 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PreviousActivities.RegisterActivity" />
-        <activity android:name=".PreviousActivities.MainChatActivity" />
-        <activity
-            android:name=".Admin.AdminActivity"
-            android:label="@string/title_activity_admin" />
         <activity
             android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -26,26 +21,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
         <activity android:name=".Teacher.teacherlogin" />
-        <activity android:name=".Student.addstudent" />
-        <activity android:name=".Teacher.addteacher" />
-        <activity android:name=".Attendance.admin_attendanceSheet" />
-        <activity android:name=".PreviousActivities.adminlogin" />
-        <activity android:name=".Attendance.student_attendance_sheet" />
+        <activity android:name=".Admin.addstudent" />
+        <activity android:name=".Admin.addteacher" />
+        <activity android:name=".Admin.adminlogin" />
+        <activity android:name=".Student.student_attendance_sheet" />
         <activity android:name=".Student.studentlogin" />
-        <activity android:name=".Attendance.takeAttendance" />
-        <activity android:name=".Attendance.teacher_attendanceSheet" />
-        <activity android:name=".Teacher.TeacherActivity" />
+        <activity android:name=".Teacher.takeAttendance" />
+        <activity android:name=".Teacher.teacher_attendanceSheet" />
         <activity android:name=".Admin.AddCourse" />
-        <activity android:name=".Student.RemoveStudent" />
-        <activity android:name=".Teacher.RemoveTeacher" />
-        <activity android:name=".Teacher.AddCoursesTeacher" />
-        <activity android:name=".RemoveCourse" />
-        <activity android:name=".Teacher.RemoveCoursesTeacher" />
+        <activity android:name=".Admin.RemoveStudent" />
+        <activity android:name=".Admin.RemoveTeacher" />
+        <activity android:name=".Admin.AddCoursesTeacher" />
+        <activity android:name=".Admin.RemoveCourse" />
+        <activity android:name=".Admin.RemoveCoursesTeacher" />
         <activity android:name=".Teacher.StudentRecord" />
         <activity android:name=".Teacher.ClassRecord" />
-        <activity android:name=".Teacher.ClassRecordDisplay"></activity>
+        <activity android:name=".Teacher.ClassRecordDisplay" />
+        <activity android:name=".Student.CourseRecord"></activity>
     </application>
 
 </manifest>

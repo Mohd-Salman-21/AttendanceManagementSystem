@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,8 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,8 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import dell.example.com.letschat.Attendance.takeAttendance;
-import dell.example.com.letschat.Attendance.teacher_attendanceSheet;
 import dell.example.com.letschat.LoginActivity;
 import dell.example.com.letschat.R;
 
@@ -56,7 +51,7 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
         message = bundle1.getString("message");
 
 
-        button=findViewById(R.id.email);
+
 
 
 
@@ -84,23 +79,7 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
 //        spinner2.setAdapter(dataAdapter);
 
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth.sendPasswordResetEmail("shanumalik16009@gmail.com")
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(teacherlogin.this,"send",Toast.LENGTH_LONG).show();
-                                }
-                                else
-                                    Toast.makeText(teacherlogin.this,"not send",Toast.LENGTH_LONG).show();
 
-                            }
-                        });
-            }
-        });
     }
 
     @Override

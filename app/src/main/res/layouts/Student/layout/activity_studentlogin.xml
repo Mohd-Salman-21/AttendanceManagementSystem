@@ -51,6 +51,36 @@
 
 
 
+        <android.support.v7.widget.CardView
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:onClick="CourseRecord"
+            app:cardBackgroundColor="#fff"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp"
+
+
+            app:cardMaxElevation="10dp"
+            app:contentPadding="25dp">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:text="COURSE RECORD"
+                android:textColor="@color/colorBlack"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </android.support.v7.widget.CardView>
+
+
 
         <!--<android.support.v7.widget.CardView-->
 

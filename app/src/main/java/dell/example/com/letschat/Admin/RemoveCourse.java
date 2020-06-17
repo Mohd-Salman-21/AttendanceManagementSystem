@@ -13,7 +13,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import dell.example.com.letschat.R;
 
-public class AddCourse extends AppCompatActivity {
+public class RemoveCourse extends AppCompatActivity {
+
+
 
     DatabaseReference dbCourse;
     String courseId;
@@ -24,34 +26,31 @@ public class AddCourse extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_course);
-        getSupportActionBar().setTitle("Add Course");
+        setContentView(R.layout.activity_remove_course);
+        getSupportActionBar().setTitle("Remove Course");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        editTextCourseId=findViewById(R.id.course_id);
+        editTextCourseId=findViewById(R.id.course_id_remove_course);
+
 
         dbCourse=FirebaseDatabase.getInstance().getReference();
 
     }
 
-    public void addCourse(View view)
-    {
-          courseId=editTextCourseId.getText().toString().toUpperCase().trim();
 
-        if(TextUtils.isEmpty(courseId))
-        {
-            Toast.makeText(getApplicationContext(),"Course Id Required", Toast.LENGTH_LONG).show();
+
+
+
+
+
+    public void removeCourse(View view) {
+        courseId = editTextCourseId.getText().toString().toUpperCase().trim();
+
+        if (TextUtils.isEmpty(courseId)) {
+            Toast.makeText(getApplicationContext(), "Course Code required", Toast.LENGTH_LONG).show();
+        } else {
+            dbCourse.child("Courses").child(courseId).setValue(null);
+            Toast.makeText(getApplicationContext(), "Course Removed successfully", Toast.LENGTH_LONG).show();
         }
-
-      else {
-
-
-            dbCourse.child("Courses").child(courseId).setValue(courseId);
-            Toast.makeText(getApplicationContext(), "Course Added successfully", Toast.LENGTH_LONG).show();
-        }
-
-
-
-
     }
 
     @Override

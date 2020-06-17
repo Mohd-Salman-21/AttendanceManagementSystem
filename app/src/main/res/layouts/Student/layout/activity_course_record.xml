@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    tools:context=".Student.CourseRecord"
+    >
+
+
+    <Spinner
+
+        android:id="@+id/courseRecordSpinnerDepartment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:entries="@array/department"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.431"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <Spinner
+        android:id="@+id/courseRecordSpinnerSemester"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/courseRecordSpinnerDepartment"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:entries="@array/semester"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.431"
+        tools:layout_editor_absoluteX="8dp" />
+
+
+
+    <LinearLayout
+        android:id="@+id/linear_course_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/courseRecordSpinnerSemester"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/courseRecord_courscode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="@dimen/dimen_32x"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="Course Code   :  CSE-02"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:textColorHint="@color/colorBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.017" />
+
+        <Button
+            android:id="@+id/courseRecordButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/loginselector"
+            android:onClick="courseRecordCalculate"
+            android:text="SHOW"
+            android:textColor="#000" />
+
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.CardView
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/linear_course_record"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="32dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="20dp"
+
+    app:cardBackgroundColor="#fff"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="8dp"
+
+
+    app:cardMaxElevation="10dp"
+    app:contentPadding="25dp">
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+    android:id="@+id/record1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical|center_horizontal"
+    android:padding="5dp"
+    android:text="CLASSES"
+    android:textColor="@color/colorBlack"
+    android:textSize="24sp"
+    android:textStyle="bold" />
+
+    <TextView
+    android:id="@+id/record2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/record1"
+    android:padding="5dp"
+    android:text="PRESENT"
+    android:textColor="@color/colorBlack"
+    android:textSize="24sp"
+    android:textStyle="bold" />
+
+    <TextView
+    android:id="@+id/record3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/record2"
+    android:layout_gravity="center_vertical|center_horizontal"
+    android:padding="5dp"
+    android:text="ABSENTS"
+    android:textColor="@color/colorBlack"
+    android:textSize="24sp"
+    android:textStyle="bold" />
+
+    <TextView
+    android:id="@+id/record4"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/record3"
+    android:layout_gravity="center_vertical|center_horizontal"
+    android:padding="5dp"
+    android:text="PERCENT"
+    android:textColor="@color/colorBlack"
+    android:textSize="24sp"
+    android:textStyle="bold" />
+
+    <TextView
+    android:id="@+id/record5"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/record1"
+    android:layout_alignParentRight="true"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    android:layout_toRightOf="@id/record1"
+    android:gravity="center_vertical|center_horizontal"
+    android:text="0"
+    android:textColor="@color/colorPrimaryDark"
+    android:textSize="24sp"
+    android:textStyle="bold" />
+
+    <TextView
+    android:id="@+id/record6"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/record5"
+    android:layout_alignParentRight="true"
+    android:layout_gravity="center_horizontal|center_vertical"
+    android:layout_marginLeft="-1dp"
+    android:layout_marginTop="9dp"
+    android:layout_marginRight="0dp"
+    android:layout_toRightOf="@id/record2"
+    android:gravity="center_vertical|center_horizontal"
+    android:text="0"
+    android:textColor="@color/colorPrimaryDark"
+    android:textSize="24sp"
+    android:textStyle="bold" />
+
+
+    <TextView
+    android:id="@+id/record7"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/record6"
+    android:layout_alignParentRight="true"
+    android:layout_gravity="center_vertical|center_horizontal"
+    android:layout_marginLeft="-1dp"
+    android:layout_marginTop="11dp"
+    android:layout_marginRight="0dp"
+    android:layout_toRightOf="@id/record3"
+    android:gravity="center_vertical|center_horizontal"
+    android:text="0"
+    android:textColor="@color/colorPrimaryDark"
+    android:textSize="24sp"
+    android:textStyle="bold" />
+
+    <TextView
+    android:id="@+id/record8"
+    android:layout_width="134dp"
+    android:layout_height="44dp"
+    android:layout_below="@id/record7"
+    android:layout_alignParentRight="true"
+    android:layout_gravity="center_vertical|center_horizontal"
+    android:layout_marginLeft="-1dp"
+    android:layout_marginTop="7dp"
+    android:layout_marginRight="0dp"
+    android:layout_toRightOf="@id/record4"
+    android:gravity="center_vertical|center_horizontal"
+    android:text="0"
+    android:textColor="@color/colorPrimaryDark"
+    android:textSize="24sp"
+    android:textStyle="bold" />
+
+    </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <!--<Button-->
+    <!--android:layout_below="@+id/attenButton"-->
+    <!--android:id="@+id/btshow"-->
+
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:background="@drawable/selector"-->
+    <!--android:onClick="showSelectedItems"-->
+    <!--android:padding="10dp"-->
+    <!--android:text="Submit"-->
+    <!--android:textColor="#000" />-->
+
+
+</RelativeLayout>
+

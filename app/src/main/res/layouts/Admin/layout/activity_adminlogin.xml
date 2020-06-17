@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="dell.example.com.letschat.Admin.adminlogin"
+
+    >
+    <!--&lt;!&ndash;<include&ndash;&gt;-->
+    <!--android:id="@+id/ftoolbar"-->
+
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--tools:layout_editor_absoluteX="8dp"-->
+    <!--/>-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView2"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+
+    <!--android:layout_gravity="center"-->
+    <!--android:gravity="center"-->
+    <!--android:text="Welcome: Admin"-->
+    <!--android:textSize="28dp"-->
+    <!--android:textColor="#ffff"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:layout_constraintVertical_bias="0.069"-->
+    <!--tools:layout_editor_absoluteX="8dp" />-->
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+
+                android:id="@+id/card_view_add_teacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="AddTeacherButton"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="8dp"
+
+
+                app:cardMaxElevation="10dp"
+                app:contentPadding="25dp">
+
+                <TextView
+                    android:id="@+id/card1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text="ADD TEACHER"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+
+                android:id="@+id/card_view_remove_teacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="RemoveTeacherButton"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="8dp"
+
+                app:cardMaxElevation="10dp"
+                app:contentPadding="25dp">
+
+                <TextView
+                    android:id="@+id/card2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text="REMOVE TEACHER"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+
+                android:id="@+id/card_view_add_student"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="AddStudentButton"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="10dp"
+
+                app:cardElevation="8dp"
+
+                app:cardMaxElevation="10dp"
+                app:contentPadding="25dp">
+
+                <TextView
+                    android:id="@+id/card3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text="ADD STUDENT"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+
+                android:id="@+id/card_view_remove_student"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="RemoveStudentButton"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="10dp"
+                app:contentPadding="25dp">
+
+                <TextView
+                    android:id="@+id/card4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text="REMOVE STUDENT"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+
+                android:id="@+id/card_view_add_course"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="AddCourseButton"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="10dp"
+                app:contentPadding="25dp">
+
+                <TextView
+                    android:id="@+id/card5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text="ADD COURSE"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+
+                android:id="@+id/card_view_remove_course"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="RemoveCourseButton"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="10dp"
+                app:contentPadding="25dp">
+
+                <TextView
+                    android:id="@+id/card6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text="REMOVE COURSE"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+
+                android:id="@+id/card_view_add_courses_teacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="addCourseToTeacher"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="10dp"
+                app:contentPadding="25dp">
+
+                <TextView
+                    android:id="@+id/card7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text="ALLOCATE COURSES TO TEACHER"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+
+                android:id="@+id/card_view_remove_courses_teacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="removeCourseToTeacher"
+                android:textColor="@color/colorBlack"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="10dp"
+                app:contentPadding="25dp">
+
+                <TextView
+                    android:id="@+id/card8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text="DEALLOCATE COURSES FROM TEACHER"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="changepassword"
+                app:cardBackgroundColor="#fff"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="10dp"
+                app:contentPadding="25dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text="CHANGE PASSWORD"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.CardView>
+
+
+            <!--<Button-->
+            <!--android:id="@+id/AddTeacherBtn"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:onClick="AddTeacherButton"-->
+            <!--android:textColor="#000"-->
+            <!--android:background="@drawable/selector"-->
+
+            <!--android:text="Add Teacher"-->
+            <!--/>-->
+
+            <!--<Button-->
+            <!--android:id="@+id/RemoveTeacherBtn"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:background="@drawable/selector"-->
+            <!--android:onClick="RemoveTeacherButton"-->
+            <!--android:text="Remove Teacher"-->
+            <!--/>-->
+            <!--<Button-->
+            <!--android:id="@+id/addstudentbutton"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:textColor="#000"-->
+            <!--android:background="@drawable/selector"-->
+            <!--android:onClick="AddStudentButton"-->
+            <!--android:text="Add Student"-->
+            <!--/>-->
+            <!--<Button-->
+            <!--android:id="@+id/removeStudentButton"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:textColor="#000"-->
+            <!--android:background="@drawable/selector"-->
+            <!--android:onClick="RemoveStudentButton"-->
+            <!--android:text="Remove Student"-->
+            <!--/>-->
+            <!--<Button-->
+            <!--android:id="@+id/coursebtn"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:onClick="AddCourseButton"-->
+            <!--android:textColor="#000"-->
+            <!--android:background="@drawable/selector"-->
+            <!--android:text="Add Course" />-->
+
+            <!--<Button-->
+            <!--android:id="@+id/remove_course_admin"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:onClick="RemoveCourseButton"-->
+            <!--android:textColor="#000"-->
+            <!--android:background="@drawable/selector"-->
+            <!--android:text="Remove Course" />-->
+
+            <!--<Button-->
+            <!--android:id="@+id/add_course_to_teacher"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:background="@drawable/selector"-->
+            <!--android:onClick="addCourseToTeacher"-->
+            <!--android:text="Allocate Courses To Teacher"-->
+            <!--android:textColor="#000" />-->
+
+
+            <!--<Button-->
+            <!--android:id="@+id/remove_course_to_teacher"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:onClick="removeCourseToTeacher"-->
+            <!--android:textColor="#000"-->
+            <!--android:background="@drawable/selector"-->
+            <!--android:text="DEALLOCATE COURSES FROM TEACHER" />-->
+
+            <!--<Button-->
+            <!--android:id="@+id/change_password_admin"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:textColor="#000"-->
+            <!--android:background="@drawable/selector"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:onClick="changepassword"-->
+            <!--android:text="Change Password"-->
+            <!--/>-->
+
+
+            <!--<Button-->
+            <!--android:id="@+id/change"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:textColor="#000"-->
+            <!--android:background="@drawable/selector"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:onClick="logout"-->
+            <!--android:text="Logout"-->
+            <!--/>-->
+            <!--<Button-->
+            <!---->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:onClick="AddTeacherButton"-->
+            <!--android:textColor="#000"-->
+            <!--android:background="@drawable/selector"-->
+
+            <!--android:text="Add Teacher"-->
+            <!--/>  <Button-->
+
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:onClick="AddTeacherButton"-->
+            <!--android:textColor="#000"-->
+            <!--android:background="@drawable/selector"-->
+
+            <!--android:text="Add Teacher"-->
+            <!--/>  <Button-->
+
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:onClick="AddTeacherButton"-->
+            <!--android:textColor="#000"-->
+            <!--android:background="@drawable/selector"-->
+
+            <!--android:text="Add Teacher"-->
+            <!--/>  <Button-->
+
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:onClick="AddTeacherButton"-->
+            <!--android:textColor="#000"-->
+            <!--android:background="@drawable/selector"-->
+
+            <!--android:text="Add Teacher"-->
+            <!--/>-->
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+
+

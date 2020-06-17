@@ -21,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import dell.example.com.letschat.Attendance.student_attendance_sheet;
 import dell.example.com.letschat.LoginActivity;
 import dell.example.com.letschat.R;
 
@@ -73,8 +72,17 @@ public class studentlogin extends AppCompatActivity {
         Bundle basket = new Bundle();
         basket.putString("sid", message);
 
-
         Intent intent = new Intent(this, student_attendance_sheet.class);
+        intent.putExtras(basket);
+        startActivity(intent);
+    }
+
+    public void CourseRecord(View v)
+    {
+        Bundle basket = new Bundle();
+        basket.putString("sid", message);
+
+        Intent intent = new Intent(this, CourseRecord.class);
         intent.putExtras(basket);
         startActivity(intent);
     }
