@@ -1,6 +1,7 @@
 package dell.example.com.letschat.Admin;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -61,7 +62,7 @@ public class AddCoursesTeacher extends AppCompatActivity implements  AdapterView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_courses_teacher);
-        getSupportActionBar().setTitle("Allocate Course");
+        getSupportActionBar().setTitle("Allocate Courses To Teacher");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -106,9 +107,7 @@ public class AddCoursesTeacher extends AppCompatActivity implements  AdapterView
         courses.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Is better to use a List, because you don't know the size
-                // of the iterator returned by dataSnapshot.getChildren() to
-                // initialize the array
+
                 List<String> areas = new ArrayList<String>();
 
                 for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
@@ -153,14 +152,34 @@ public class AddCoursesTeacher extends AppCompatActivity implements  AdapterView
 
 
     public  void addCourseToTeacher(View view) {
-        String id = techerId.getText().toString().toLowerCase().trim();
+      final   String id = techerId.getText().toString().toLowerCase().trim();
 
         if (TextUtils.isEmpty(id))
             Toast.makeText(getApplicationContext(), "Teacher id cannot be empty", Toast.LENGTH_LONG).show();
        else {
-            //list.add(courseCodeName);
-            databaseReference.child("Teacher").child("Department").child(departmentName).child(id).child("courses").child(courseIdName).setValue(courseIdName);
-            Toast.makeText(getApplicationContext(), "Course Added Successfully", Toast.LENGTH_LONG).show();
+
+
+            databaseReference.child("Teacher").child("Department").child(departmentName).child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists())
+                    {
+                        databaseReference.child("Teacher").child("Department").child(departmentName).child(id).child("courses").child(courseIdName).setValue(courseIdName);
+                        Toast.makeText(getApplicationContext(), "Course Added Successfully", Toast.LENGTH_LONG).show();
+                    }else
+                    {
+                        Toast.makeText(getApplicationContext(), "Teacher Id doesn't exist", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
+
         }
     }
 

@@ -1,6 +1,7 @@
 package dell.example.com.letschat.Admin;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -11,8 +12,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import dell.example.com.letschat.R;
 
@@ -70,10 +74,30 @@ public class RemoveTeacher extends AppCompatActivity  implements AdapterView.OnI
     public void removeTeacherButton(View v){
         if (!TextUtils.isEmpty(Tid.getText().toString())) {
             tid = Tid.getText().toString().toLowerCase().trim();
-            databaseTeacher.child("Teacher").child("Department").child(departmentName).child(tid).setValue(null);
-            databaseTeacher.child("Teacher").child("Logins").child(tid).setValue(null);
-            Toast.makeText(getApplicationContext(),"Teacher removed successfully", Toast.LENGTH_LONG).show();
-            finish();
+
+            databaseTeacher.child("Teacher").child("Department").child(departmentName).child(tid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists())
+                    {
+                        databaseTeacher.child("Teacher").child("Department").child(departmentName).child(tid).setValue(null);
+                        databaseTeacher.child("Teacher").child("Logins").child(tid).setValue(null);
+                        Toast.makeText(getApplicationContext(),"Teacher removed successfully", Toast.LENGTH_LONG).show();
+                        finish();
+                    }else
+                    {
+                        Toast.makeText(getApplicationContext(),"Teacher doesn't exist", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
+
 
         }else {
             Toast.makeText(getApplicationContext(),"Id cannot be empty", Toast.LENGTH_LONG).show();

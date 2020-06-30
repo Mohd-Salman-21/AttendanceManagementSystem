@@ -6,14 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,64 +18,36 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import dell.example.com.letschat.LoginActivity;
 import dell.example.com.letschat.R;
 
-public class teacherlogin extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class teacherlogin extends AppCompatActivity{
     String item;
     String message;
-    Toolbar mToolbar;
+
     DatabaseReference dbadmin;
-    Button button;
+
    private FirebaseAuth mAuth;
     DatabaseReference ref;
     private static long back_pressed;
-    String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacherlogin);
-        //Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+
 
         mAuth=FirebaseAuth.getInstance();
-
 
         //to get username from login page
         Bundle bundle1 = getIntent().getExtras();
         message = bundle1.getString("message");
 
 
-
-
-
-
         getSupportActionBar().setTitle(message);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         ref = FirebaseDatabase.getInstance().getReference();
-//        // Spinner click listener
-//        spinner2.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
-//
-//        // Spinner Drop down elements
-//        List<String> categories = new ArrayList<String>();
-//        categories.add("IT-A");
-//        categories.add("IT-B");
-//        categories.add("IT-C");
-//        categories.add("IT-D");
-//
-//        // Creating adapter for spinner
-//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-//
-//        // Drop down layout style - list view with radio button
-//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        // attaching data adapter to spinner
-//        spinner2.setAdapter(dataAdapter);
-
-
 
     }
 
@@ -103,17 +72,6 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        item = parent.getItemAtPosition(position).toString();
-
-        // Showing selected spinner item
-        //  Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-    }
-    public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
-    }
 
     public void studentRecord(View v)
     {
@@ -134,6 +92,18 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
         Intent intent = new Intent(this, ClassRecord.class);
         intent.putExtras(basket);
         startActivity(intent);
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     public void takeAttendanceButton(View v){
@@ -165,17 +135,28 @@ public class teacherlogin extends AppCompatActivity implements AdapterView.OnIte
         final LayoutInflater inflater = this.getLayoutInflater();
         View add_menu_layout = inflater.inflate(R.layout.changepassword, null);
         final EditText password = (EditText) add_menu_layout.findViewById(R.id.newpassword);
+        final EditText confirmPassword=add_menu_layout.findViewById(R.id.confirmpassword);
         alertDialog.setView(add_menu_layout);
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(final DialogInterface dialog, int which) {
-                if (!TextUtils.isEmpty(password.getText().toString())) {
-                    dbadmin.setValue(password.getText().toString());
-                    Toast.makeText(teacherlogin.this, "Successfully Changed", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(teacherlogin.this, "Please Enter New Password", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(password.getText().toString().trim()))
+                {
+                    Toast.makeText(teacherlogin.this, "Password cannot be empty", Toast.LENGTH_SHORT).show();
+                }else  if(TextUtils.isEmpty(confirmPassword.getText().toString().trim()))
+                {
+                    Toast.makeText(teacherlogin.this, "Confirm Password cannot be empty", Toast.LENGTH_SHORT).show();
                 }
+                else if(confirmPassword.getText().toString().trim().equals(password.getText().toString().trim())){
+                    dbadmin.setValue(password.getText().toString().trim());
+                    Toast.makeText(teacherlogin.this, "Successfully Changed", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    Toast.makeText(teacherlogin.this, "Password and confirm password doesnt match", Toast.LENGTH_SHORT).show();
+                }
+
 
 
             }

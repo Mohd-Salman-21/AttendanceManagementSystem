@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,7 +29,7 @@ public class studentlogin extends AppCompatActivity {
 
     DatabaseReference dbadmin;
     DatabaseReference ref;
-    Toolbar mToolbar;
+
 
     private static long back_pressed;
     @Override
@@ -102,17 +101,28 @@ public class studentlogin extends AppCompatActivity {
         final LayoutInflater inflater = this.getLayoutInflater();
         View add_menu_layout = inflater.inflate(R.layout.changepassword, null);
         final EditText password = (EditText) add_menu_layout.findViewById(R.id.newpassword);
+        final EditText confirmPassword=add_menu_layout.findViewById(R.id.confirmpassword);
         alertDialog.setView(add_menu_layout);
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(final DialogInterface dialog, int which) {
-                if (!TextUtils.isEmpty(password.getText().toString())) {
-                    dbadmin.setValue(password.getText().toString());
-                    Toast.makeText(studentlogin.this, "Successfully Changed", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(studentlogin.this, "Please Enter New Password", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(password.getText().toString().trim()))
+                {
+                    Toast.makeText(studentlogin.this, "Password cannot be empty", Toast.LENGTH_SHORT).show();
+                }else  if(TextUtils.isEmpty(confirmPassword.getText().toString().trim()))
+                {
+                    Toast.makeText(studentlogin.this, "Confirm Password cannot be empty", Toast.LENGTH_SHORT).show();
                 }
+                else if(confirmPassword.getText().toString().trim().equals(password.getText().toString().trim())){
+                    dbadmin.setValue(password.getText().toString().trim());
+                    Toast.makeText(studentlogin.this, "Successfully Changed", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    Toast.makeText(studentlogin.this, "Password and confirm password doesnt match", Toast.LENGTH_SHORT).show();
+                }
+
 
 
             }
@@ -124,7 +134,6 @@ public class studentlogin extends AppCompatActivity {
             }
         });
         alertDialog.show();
-
     }
 
 

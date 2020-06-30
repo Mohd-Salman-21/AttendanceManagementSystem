@@ -1,7 +1,8 @@
 package dell.example.com.letschat.Admin;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,44 +25,18 @@ import dell.example.com.letschat.R;
 
 public class RemoveCoursesTeacher extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    EditText techerId,courseCode;
-    String courseCodeName,departmentName;
+    EditText techerId;
+    String departmentName;
     Spinner department;
     DatabaseReference databaseReference;
-
-
-
-
-
+    boolean flag=true;
 
     Spinner courseId;
     String courseIdName;
 
-
-
-
-
-
-
-
-
-
-    String teacher_id,class_selected;
-
-
-    EditText date;
-    ArrayList Userlist = new ArrayList<>();
-    ArrayList Studentlist = new ArrayList<>();
-
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference dbAttendance;
-    DatabaseReference dbStudent,courses;
-    String required_date;
 
-
-    ArrayList<String> list=new ArrayList<>();
-
-
+    DatabaseReference courses,check;
 
 
     @Override
@@ -70,7 +45,7 @@ public class RemoveCoursesTeacher extends AppCompatActivity implements AdapterVi
         setContentView(R.layout.activity_remove_courses_teacher);
 
 
-        getSupportActionBar().setTitle("Deallocate Course");
+        getSupportActionBar().setTitle("Deallocate Courses From Teacher");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -110,71 +85,95 @@ public class RemoveCoursesTeacher extends AppCompatActivity implements AdapterVi
 
     public void courseSelectionAdminRemoveCourse(View view) {
 
-        String id = techerId.getText().toString().toLowerCase().trim();
+
+        final String id = techerId.getText().toString().toLowerCase().trim();
 
         if(TextUtils.isEmpty(id))
         {
             Toast.makeText(getApplicationContext(), "Teacher id cannot be empty", Toast.LENGTH_LONG).show();
         }else {
 
-            courses = ref.child("Teacher").child("Department").child(departmentName).child(id).child("courses");
-            courses.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // Is better to use a List, because you don't know the size
-                    // of the iterator returned by dataSnapshot.getChildren() to
-                    // initialize the array
-                    List<String> areas = new ArrayList<String>();
+            check=ref.child("Teacher").child("Department").child(departmentName).child(id);
+             check.addListenerForSingleValueEvent(new ValueEventListener() {
+                 @Override
+                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                     if(dataSnapshot.exists())
+                     {
+                         courses = ref.child("Teacher").child("Department").child(departmentName).child(id).child("courses");
+                         courses.addValueEventListener(new ValueEventListener() {
+                             @Override
+                             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
-                        String areaName = areaSnapshot.getValue(String.class);
-                        areas.add(areaName);
-                    }
+                                 List<String> areas = new ArrayList<String>();
 
-                    courseId = findViewById(R.id.spinner_courses_teacher_remove_course);
+                                 for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
+                                     String areaName = areaSnapshot.getValue(String.class);
+                                     areas.add(areaName);
+                                 }
 
-
-                    ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(RemoveCoursesTeacher.this, android.R.layout.simple_spinner_item, areas);
-                    areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    courseId.setAdapter(areasAdapter);
-                    courseId.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            courseIdName = adapterView.getItemAtPosition(i).toString();
-
-
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
+                                 courseId = findViewById(R.id.spinner_courses_teacher_remove_course);
+                                 flag=false;
+                                 ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(RemoveCoursesTeacher.this, android.R.layout.simple_spinner_item, areas);
+                                 areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                 courseId.setAdapter(areasAdapter);
+                                 courseId.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                     @Override
+                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                         courseIdName = adapterView.getItemAtPosition(i).toString();
 
 
-                }
+                                     }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(getApplicationContext(), "something wrong with courseid", Toast.LENGTH_LONG).show();
+                                     @Override
+                                     public void onNothingSelected(AdapterView<?> adapterView) {
 
-                }
-            });
+                                     }
+                                 });
+
+
+                             }
+
+                             @Override
+                             public void onCancelled(DatabaseError databaseError) {
+                                 Toast.makeText(getApplicationContext(), "something wrong with courseid", Toast.LENGTH_LONG).show();
+
+                             }
+                         });
+                     }else {
+                         Toast.makeText(getApplicationContext(), "Teacher doesn't exist", Toast.LENGTH_LONG).show();
+                     }
+                 }
+
+                 @Override
+                 public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                 }
+             });
+
+
+
         }
 
     }
 
 
     public  void removeCourseToTeacher(View view) {
-        String id = techerId.getText().toString().toLowerCase().trim();
-
-        if (TextUtils.isEmpty(id))
-            Toast.makeText(getApplicationContext(), "Teacher id cannot be empty", Toast.LENGTH_LONG).show();
-
+        if(flag==true)
+        {
+            Toast.makeText(getApplicationContext(), "First fetch courses please", Toast.LENGTH_LONG).show();
+        }
         else {
-            //list.add(courseCodeName);
-            databaseReference.child("Teacher").child("Department").child(departmentName).child(id).child("courses").child(courseIdName).setValue(null);
-            Toast.makeText(getApplicationContext(), "Course Removed Successfully", Toast.LENGTH_LONG).show();
+            String id = techerId.getText().toString().toLowerCase().trim();
+
+            if (TextUtils.isEmpty(id))
+                Toast.makeText(getApplicationContext(), "Teacher id cannot be empty", Toast.LENGTH_LONG).show();
+
+            else {
+
+                databaseReference.child("Teacher").child("Department").child(departmentName).child(id).child("courses").child(courseIdName).setValue(null);
+                Toast.makeText(getApplicationContext(), "Course Removed Successfully", Toast.LENGTH_LONG).show();
+            }
+            flag=true;
         }
     }
 

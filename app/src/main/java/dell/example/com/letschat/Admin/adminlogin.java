@@ -18,9 +18,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import dell.example.com.letschat.LoginActivity;
 import dell.example.com.letschat.R;
@@ -37,14 +35,12 @@ public class adminlogin extends AppCompatActivity {
 
     ArrayList Studentlist = new ArrayList<>();
 
-    String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adminlogin);
 
-//        mToolbar = (Toolbar) findViewById(R.id.ftoolbar);
-//        setSupportActionBar(mToolbar);
+
         getSupportActionBar().setTitle("Admin");
 
         ref = FirebaseDatabase.getInstance().getReference();
@@ -146,20 +142,27 @@ public class adminlogin extends AppCompatActivity {
         alertDialog.setTitle("Type your new password");
         final LayoutInflater inflater = this.getLayoutInflater();
         View add_menu_layout = inflater.inflate(R.layout.changepassword, null);
-        final EditText password=(EditText)add_menu_layout.findViewById(R.id.newpassword);
+        final EditText password = (EditText) add_menu_layout.findViewById(R.id.newpassword);
+        final EditText confirmPassword=add_menu_layout.findViewById(R.id.confirmpassword);
         alertDialog.setView(add_menu_layout);
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(final DialogInterface dialog, int which) {
-                if (!TextUtils.isEmpty(password.getText().toString()))
+                if(TextUtils.isEmpty(password.getText().toString().trim()))
                 {
-                    dbadmin.setValue(password.getText().toString());
-                    Toast.makeText(adminlogin.this, "Successfully Changed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(adminlogin.this, "Password cannot be empty", Toast.LENGTH_SHORT).show();
+                }else  if(TextUtils.isEmpty(confirmPassword.getText().toString().trim()))
+                {
+                    Toast.makeText(adminlogin.this, "Confirm Password cannot be empty", Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
-                    Toast.makeText(adminlogin.this, "Please Enter New Password", Toast.LENGTH_SHORT).show();
+                else if(confirmPassword.getText().toString().trim().equals(password.getText().toString().trim())){
+                    dbadmin.setValue(password.getText().toString().trim());
+                    Toast.makeText(adminlogin.this, "Successfully Changed", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    Toast.makeText(adminlogin.this, "Password and confirm password doesnt match", Toast.LENGTH_SHORT).show();
                 }
 
 

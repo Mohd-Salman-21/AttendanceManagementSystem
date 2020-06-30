@@ -55,7 +55,7 @@
         android:layout_below="@+id/classRecordSpinnerCourse"
 
         android:background="@drawable/loginselector"
-        android:onClick="viewlistClassRecord"
+        android:onClick="checkTeacher"
 
         android:text="SHOW" />
 

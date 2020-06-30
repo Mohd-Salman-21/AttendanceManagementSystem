@@ -1,7 +1,9 @@
 package dell.example.com.letschat.Student;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -29,16 +30,11 @@ public class student_attendance_sheet extends AppCompatActivity implements  Adap
     String departmentName, semesterName;
      EditText course;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference courses;
 
 
-    public static int TOC = 1, NOP = 1, NOA = 1;
-    float average = (float) 0.0;
-    TextView t,one;
-    String avg, p1, p2, p3, p4, p5, p6, p7, p8;
+    String  p1;
     String student_id;
     ArrayList dates = new ArrayList<>();
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     DatabaseReference dbAttendance;
     ListView listView;
 
@@ -112,49 +108,75 @@ public class student_attendance_sheet extends AppCompatActivity implements  Adap
     public void GetStudentData(View view)
 
     {
-             dates.clear();
-        String courseName=course.getText().toString().toUpperCase().trim();
-
-        dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseName);
-        dbAttendance.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    p1 = dsp.child(student_id).child("p1").getValue().toString().substring(0, 1);
-
-                    dates.add(dsp.getKey() + "                                " + p1 + "     "); //add result into array list
-
-
-//                    //  Toast.makeText(getApplicationContext(),dsp.child(student_id).child("p1").getValue().toString(),Toast.LENGTH_LONG).show();
-//                    if (p1.equals("P")) {
-//
-//                        NOP++;
-//                        TOC++;
-//                    }
-//                    if(p1.equals("A")) {
-//                        NOA++;
-//                        TOC++;
-//                    }
+        dates.clear();
+       final String courseName=course.getText().toString().toUpperCase().trim();
 
 
 
+        if(TextUtils.isEmpty(courseName))
+        {
+            Toast.makeText(getApplicationContext(),"Course code cannot be empty",Toast.LENGTH_LONG).show();
+        }else
+        {
+            dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseName);
+            dbAttendance.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
+                    if(dataSnapshot.exists())
+                    {
+
+                        dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseName);
+                        dbAttendance.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                                    p1 = dsp.child(student_id).child("p1").getValue().toString().substring(0, 1);
+
+                                    dates.add(dsp.getKey() + "                                " + p1 + "     ");
+
+
+
+
+
+
+
+                                }
+                                list(dates);
+
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }else {
+                        Toast.makeText(getApplicationContext(),"Record not Found, check inputs",Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
-                list(dates);
+            });
+
+        }
 
 
-                //  Toast.makeText(getApplicationContext(), dates.toString(), Toast.LENGTH_LONG).show();
 
 
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_LONG).show();
-            }
-        });
+
+
+
+
+
+
 
     }
 

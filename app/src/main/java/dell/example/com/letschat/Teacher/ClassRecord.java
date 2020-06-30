@@ -1,6 +1,7 @@
 package dell.example.com.letschat.Teacher;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +34,7 @@ public class ClassRecord extends AppCompatActivity implements AdapterView.OnItem
 
     Spinner semester,department,courseId;
     String semesterName,departmentName,courseIdName;
+    Object object;
 
 
 
@@ -42,6 +44,7 @@ public class ClassRecord extends AppCompatActivity implements AdapterView.OnItem
     EditText date,editText;
 
     TextView one,two,three,four;
+    boolean flag=true;
 
 
      ArrayList pres=new ArrayList<>();
@@ -60,7 +63,7 @@ public class ClassRecord extends AppCompatActivity implements AdapterView.OnItem
 
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
     DatabaseReference dbAttendance;
-    DatabaseReference dbStudent,courses;
+    DatabaseReference dbStudent,courses,dbTeacher;
     String required_date;
 
 
@@ -201,7 +204,8 @@ public class ClassRecord extends AppCompatActivity implements AdapterView.OnItem
         if(adapterView.getId()==R.id.classRecordSpinnerDepartment)
         {
             departmentName=adapterView.getItemAtPosition(i).toString();
-            courseSelectionClassRecord();
+              courseSelectionClassRecord();
+
         }else if(adapterView.getId()==R.id.classRecordSpinnerSemester)
         {
             semesterName=adapterView.getItemAtPosition(i).toString();
@@ -213,75 +217,129 @@ public class ClassRecord extends AppCompatActivity implements AdapterView.OnItem
 
     }
 
+    public void checkTeacher(View view)
+    {
 
-    public void courseSelectionClassRecord() {
-
-        courses=ref.child("Teacher");
-        courses.child("Department").child(departmentName).child(teacher_id).child("courses").addValueEventListener(new ValueEventListener() {
+        dbTeacher=ref.child("Teacher").child("Department").child(departmentName).child(teacher_id);
+        dbTeacher.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Is better to use a List, because you don't know the size
-                // of the iterator returned by dataSnapshot.getChildren() to
-                // initialize the array
-                List<String> areas = new ArrayList<String>();
-
-                for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
-                    String areaName = areaSnapshot.getValue(String.class);
-                    areas.add(areaName);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists())
+                {
+                   viewlistClassRecord();
+                }else{
+                    Toast.makeText(getApplicationContext(),"Teacher is not present in selected department",Toast.LENGTH_LONG).show();
                 }
-
-                courseId = findViewById(R.id.classRecordSpinnerCourse);
-
-
-                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, areas);
-                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                courseId.setAdapter(areasAdapter);
-                courseId.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        courseIdName = adapterView.getItemAtPosition(i).toString();
-
-
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
-
-
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "something wrong with courseid", Toast.LENGTH_LONG).show();
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-
-
     }
 
 
+    public void courseSelectionClassRecord() {
 
 
-    public void viewlistClassRecord(View v) {
 
-        setContentView(R.layout.activity_class_record_display);
+
+
+            courses = ref.child("Teacher");
+            courses.child("Department").child(departmentName).child(teacher_id).child("courses").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // Is better to use a List, because you don't know the size
+                    // of the iterator returned by dataSnapshot.getChildren() to
+                    // initialize the array
+                    List<String> areas = new ArrayList<String>();
+
+                    for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
+                        String areaName = areaSnapshot.getValue(String.class);
+                        areas.add(areaName);
+                    }
+
+                    courseId = findViewById(R.id.classRecordSpinnerCourse);
+
+
+                    ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, areas);
+                    areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    courseId.setAdapter(areasAdapter);
+                    courseId.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            courseIdName = adapterView.getItemAtPosition(i).toString();
+
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(getApplicationContext(), "something wrong with courseid", Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }
+
+
+
+
+
+
+
+    public void viewlistClassRecord() {
+
+
+
+
 
         Userlist.clear();
-        dbStudent = ref.child("Student").child("Department").child(departmentName).child("Semester").child(semesterName);
-        dbStudent.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseIdName);
+        dbAttendance.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Result will be holded Here
-                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    Userlist.add(dsp.child("sid").getValue().toString()); //add result into array list
+              if(dataSnapshot.exists()){
 
-                }
-                display_listClassRecord(Userlist);
+                  setContentView(R.layout.activity_class_record_display);
 
+                  dbStudent = ref.child("Student").child("Department").child(departmentName).child("Semester").child(semesterName);
+                  dbStudent.addListenerForSingleValueEvent(new ValueEventListener() {
+                      @Override
+                      public void onDataChange(DataSnapshot dataSnapshot) {
+                          // Result will be holded Here
+                          for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                              Userlist.add(dsp.child("sid").getValue().toString()); //add result into array list
+
+                          }
+                          display_listClassRecord(Userlist);
+
+
+                      }
+
+                      @Override
+                      public void onCancelled(DatabaseError databaseError) {
+                          Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_LONG).show();
+                      }
+
+                  });
+
+
+              }else
+              {
+                  Toast.makeText(getApplicationContext(),"Record not found: Double check with inputs",Toast.LENGTH_LONG).show();
+              }
 
             }
 
@@ -291,6 +349,14 @@ public class ClassRecord extends AppCompatActivity implements AdapterView.OnItem
             }
 
         });
+
+
+
+
+
+
+
+
 
 
 

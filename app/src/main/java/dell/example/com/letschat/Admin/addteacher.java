@@ -1,10 +1,9 @@
 package dell.example.com.letschat.Admin;
 
 
-
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,8 +13,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import dell.example.com.letschat.R;
 import dell.example.com.letschat.UtilityClasses.Teacher;
@@ -28,7 +30,7 @@ public class addteacher extends AppCompatActivity implements AdapterView.OnItemS
     String tname,tid,tpass,departmentNameAddTeacher;
 
     DatabaseReference databaseTeacher;
-    Toolbar mToolbar;
+
 
 
     @Override
@@ -94,11 +96,33 @@ public class addteacher extends AppCompatActivity implements AdapterView.OnItemS
          }
           else{
 
-            Teacher teacher =new Teacher(tname.toUpperCase() ,tid.toLowerCase()  ,"Select Course");
-            databaseTeacher.child("Teacher").child("Department").child(departmentNameAddTeacher).child(tid.toLowerCase()).setValue(teacher);
-            databaseTeacher.child("Teacher").child("Logins").child(tid.toLowerCase()).setValue(tpass);
-            Toast.makeText(getApplicationContext(),"Teacher added successfully", Toast.LENGTH_LONG).show();
-            finish();
+
+
+             databaseTeacher.child("Teacher").child("Logins").child(tid.toLowerCase()).addListenerForSingleValueEvent(new ValueEventListener() {
+                 @Override
+                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                     if(dataSnapshot.exists())
+                     {
+                         Toast.makeText(getApplicationContext(),"Teacher Id already present", Toast.LENGTH_LONG).show();
+
+                     }else
+                     {
+                         Teacher teacher =new Teacher(tname.toUpperCase() ,tid.toLowerCase()  ,"Select Course");
+                         databaseTeacher.child("Teacher").child("Department").child(departmentNameAddTeacher).child(tid.toLowerCase()).setValue(teacher);
+                         databaseTeacher.child("Teacher").child("Logins").child(tid.toLowerCase()).setValue(tpass);
+                         Toast.makeText(getApplicationContext(),"Teacher added successfully", Toast.LENGTH_LONG).show();
+                         finish();
+                     }
+                 }
+
+                 @Override
+                 public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                 }
+             });
+
+
+
 
         }
 

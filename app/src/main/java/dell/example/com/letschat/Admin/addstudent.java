@@ -2,6 +2,7 @@ package dell.example.com.letschat.Admin;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -12,8 +13,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import dell.example.com.letschat.R;
 import dell.example.com.letschat.UtilityClasses.Student;
@@ -97,10 +101,33 @@ public class addstudent extends AppCompatActivity implements AdapterView.OnItemS
             sid = Sid.getText().toString().toLowerCase().trim();
             spass = spassword.getText().toString().trim();
 
-            Student student =new Student(sname ,sid );
-            databaseStudent.child("Department").child(departmentName).child("Semester").child(semesterName).child(sid).setValue(student);
-            databaseStudent.child("Logins").child(sid).setValue(spass);
-            Toast.makeText(getApplicationContext(),"student added successfully", Toast.LENGTH_LONG).show();
+
+               databaseStudent.child("Logins").child(sid).addListenerForSingleValueEvent(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                       if(dataSnapshot.exists())
+                       {
+                           Toast.makeText(getApplicationContext(),"Student already exists",Toast.LENGTH_LONG).show();
+                       }
+                       else
+                       {
+
+                           Student student =new Student(sname ,sid );
+                           databaseStudent.child("Department").child(departmentName).child("Semester").child(semesterName).child(sid).setValue(student);
+                           databaseStudent.child("Logins").child(sid).setValue(spass);
+                           Toast.makeText(getApplicationContext(),"student added successfully", Toast.LENGTH_LONG).show();
+                       }
+                   }
+
+                   @Override
+                   public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                   }
+               });
+
+
+
+
 
         }
     }

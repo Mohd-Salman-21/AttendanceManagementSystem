@@ -4,28 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient2"
     android:orientation="vertical"
-    tools:context="dell.example.com.letschat.Admin.addteacher"
-    android:background="@color/colorBlack">
+    tools:context="dell.example.com.letschat.Admin.addteacher">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         android:background="@drawable/bottom"
-        >
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <EditText
             android:id="@+id/teacherNameAddTeacher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="Teacher Name"
             android:inputType="textPersonName"
@@ -38,8 +37,8 @@
             android:id="@+id/teacherIdAddTeacher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="Teacher Id"
             android:inputType="textPersonName"
@@ -49,19 +48,17 @@
             tools:layout_editor_absoluteX="8dp" />
 
 
-
-
         <Spinner
             android:id="@+id/spinnerDepartmentAddTeacher"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:entries="@array/department"
-            tools:layout_editor_absoluteX="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="8dp"
-            app:layout_constraintVertical_bias="0.549" />
+            android:layout_marginBottom="8dp"
+            android:entries="@array/department"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.549"
+            tools:layout_editor_absoluteX="8dp" />
 
 
         <EditText
@@ -79,26 +76,26 @@
             tools:layout_editor_absoluteX="8dp" />
 
         <Button
-                android:id="@+id/button9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:onClick="addTeacher"
-                android:text="Add"
-                android:background="@drawable/selector"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_weight="1"
-                app:layout_constraintVertical_bias="0.863"
-                app:layout_constraintHorizontal_bias="0.171" />
+            android:id="@+id/button9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector"
+            android:onClick="addTeacher"
+            android:text="Add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.171"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.863" />
 
-        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

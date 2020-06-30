@@ -12,23 +12,6 @@
 
 
 
-        <!--<TextView-->
-        <!--android:id="@+id/textView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="36dp"-->
-        <!--android:text="TextView"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:gravity="center"-->
-        <!--android:textSize="20dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.917"-->
-        <!--app:layout_constraintLeft_toLeftOf="@+id/btshow"-->
-        <!--app:layout_constraintRight_toRightOf="@+id/btshow"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.004"-->
-        <!--tools:layout_constraintLeft_creator="1"-->
-        <!--tools:layout_constraintRight_creator="1" />-->
-
 
         <Spinner
 
@@ -88,36 +71,22 @@
         <!--android:textColor="#000" />-->
 
 
-
-
     <Button
-            android:layout_below="@+id/attenButton"
-            android:id="@+id/btshow"
+        android:id="@+id/btshow"
+        android:layout_width="match_parent"
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-       android:layout_margin="10dp"
-            android:background="@drawable/selector"
-            android:onClick="showSelectedItems"
-            android:padding="10dp"
-            android:text="Submit"
-            android:textColor="#000" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/attenButton"
+
+        android:layout_margin="10dp"
+        android:background="@drawable/selector"
+        android:onClick="showSelectedItems"
+        android:padding="10dp"
+        android:text="Submit"
+        android:textColor="#000" />
 
 
-    <!--<Button-->
-        <!--android:id="@+id/report"-->
 
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/btshow"-->
-        <!--android:layout_margin="10dp"-->
-
-        <!--android:background="@drawable/loginselector"-->
-        <!--android:onClick="addtoreport"-->
-        <!--android:padding="10dp"-->
-        <!--android:text="Report"-->
-        <!--android:textColor="#000"-->
-        <!--tools:ignore="OnClick" />-->
 
 
     <ListView
@@ -129,8 +98,7 @@
         android:layout_below="@+id/btshow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintLeft_toLeftOf="@+id/textView"
-        app:layout_constraintRight_toRightOf="@+id/textView"
+
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.496"
         tools:layout_constraintLeft_creator="1"

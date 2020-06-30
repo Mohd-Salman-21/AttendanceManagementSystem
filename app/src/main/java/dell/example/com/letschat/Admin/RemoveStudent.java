@@ -1,6 +1,7 @@
 package dell.example.com.letschat.Admin;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -11,8 +12,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import dell.example.com.letschat.R;
 
@@ -49,12 +53,12 @@ public class RemoveStudent extends AppCompatActivity implements AdapterView.OnIt
 
         removeSemester=findViewById(R.id.spinnerSemesterRemoveStudent);
         removeSemester.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
-// Create an ArrayAdapter using the string array and a default spinner layout
+         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
                 R.array.semester, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
+        // Specify the layout to use when the list of choices appears
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
+         // Apply the adapter to the spinner
         removeSemester.setAdapter(adapter2);
 
 
@@ -82,13 +86,34 @@ public class RemoveStudent extends AppCompatActivity implements AdapterView.OnIt
         // TODO Auto-generated method stub
     }
     public void removeStudent(View v){
+
+
+
+
         if (!TextUtils.isEmpty(Sid.getText().toString())) {
             sid = Sid.getText().toString().toLowerCase().trim();
 
+            databaseStudent.child("Department").child(removeDepartmentName).child("Semester").child(removeSemesterName).child(sid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists())
+                    {
+                        databaseStudent.child("Department").child(removeDepartmentName).child("Semester").child(removeSemesterName).child(sid).setValue(null);
+                        databaseStudent.child("Logins").child(sid).setValue(null);
+                        Toast.makeText(getApplicationContext(),"Student removed successfully", Toast.LENGTH_LONG).show();
 
-            databaseStudent.child("Department").child(removeDepartmentName).child("Semester").child(removeSemesterName).child(sid).setValue(null);
-            databaseStudent.child("Logins").child(sid).setValue(null);
-            Toast.makeText(getApplicationContext(),"Student removed successfully", Toast.LENGTH_LONG).show();
+                    }else
+                    {
+                        Toast.makeText(getApplicationContext(),"Student doesn't exist", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
 
         }else {
             Toast.makeText(getApplicationContext(),"id cannot be empty", Toast.LENGTH_LONG).show();

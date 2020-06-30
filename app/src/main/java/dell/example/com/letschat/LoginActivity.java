@@ -44,33 +44,29 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         setContentView(R.layout.activity_login);
 
 
-        //retrieving student id from firebase
-
-
-
         username =  (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.editText2);
 
 
-        // Spinner element
+
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
-        // Spinner click listener
+
         spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
 
-        // Spinner Drop down elements
+
         List<String> categories = new ArrayList<String>();
         categories.add("Admin");
         categories.add("Teacher");
         categories.add("Student");
 
-        // Creating adapter for spinner
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, categories);
 
-        // Drop down layout style - list view with radio button
+
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // attaching data adapter to spinner
+
         spinner.setAdapter(dataAdapter);
 
     }
@@ -81,13 +77,13 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
+
 
         item = parent.getItemAtPosition(position).toString();
 
 
 
-        // Showing selected spinner item
+
     }
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
@@ -95,7 +91,6 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
 
     public void onButtonClick(View v) {
-
 
         userid = username.getText().toString().trim();
         pass = password.getText().toString().trim();
@@ -119,7 +114,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
             dbuser.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    String dbchild = null;
+
                     try {
                         if (item == "Admin") {
                             mDialog.dismiss();
@@ -127,19 +122,11 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                             verify(dbpassword);
 
 
-                        } else {
-                            mDialog.dismiss();
-                            if (item == "Student") {
-                                dbchild = "Logins";
-                            }
-                            if (item == "Teacher") {
-                                dbchild = "Logins";
-                            }
-
+                        }
                             dbpassword = dataSnapshot.getValue(String.class);
                             verify(dbpassword);
                             //do what you want with the email
-                        }
+
                     } catch (Exception e) {
                         Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
@@ -167,12 +154,12 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         }
 
         else if (item == "Admin" && pass.equals(this.dbpassword) ) {
-            //  if (userid.equalsIgnoreCase("admin") && pass.equals("admin")) {
+
             mDialog.dismiss();
             Intent intent = new Intent(this, adminlogin.class);
             intent.putExtras(basket);
             startActivity(intent);
-            //  }
+
         }
         else if (item == "Student" && pass.equals(this.dbpassword)) {
             mDialog.dismiss();
@@ -182,6 +169,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         }
         else if(! pass.equals(this.dbpassword)){
             Toast.makeText(getApplicationContext(),"UserId or Password is Incorrect", Toast.LENGTH_LONG).show();
+            mDialog.dismiss();
 
         }
 

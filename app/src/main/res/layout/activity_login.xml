@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    app:layout_constraintTop_toTopOf="@+id/spinner"
-    tools:layout_editor_absoluteX="0dp"
-    android:orientation="vertical"
     android:layout_gravity="center"
-    android:gravity="center"
     android:background="@color/colorPrimary"
-   >
+    android:gravity="center"
+    android:orientation="vertical"
+    app:layout_constraintTop_toTopOf="@+id/spinner"
+    tools:context=".LoginActivity"
+    tools:layout_editor_absoluteX="0dp">
 
 
     <TextView
@@ -26,53 +25,54 @@
         android:textStyle="bold|italic" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_gravity="center"
-        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:id="@+id/linearLayout">
+        android:gravity="center"
+        android:orientation="vertical">
+
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            tools:layout_editor_absoluteX="8dp"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/colorWhite"
 
-            android:layout_marginTop="20dp"/>
+            tools:layout_editor_absoluteX="8dp" />
 
 
         <EditText
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:ems="10"
             android:hint="User Id"
+            android:inputType="textPersonName"
             android:textColor="#ffff"
             android:textColorHint="#fff"
-            android:layout_margin="10dp"
-            android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.475"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.205" />
+
         <EditText
             android:id="@+id/editText2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
-            android:textColorHint="#fff"
-            android:textColor="#fff"
             android:hint="Password"
             android:inputType="textPassword"
-            />
+            android:textColor="#fff"
+            android:textColorHint="#fff" />
 
         <Button
             android:id="@+id/loginButton"
@@ -98,13 +98,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ffff"
-            android:text="Not Registered? Contact With Your Faculty or Admin"/>
+            android:text="Not Registered? Contact With Your Faculty or Admin"
+            android:textColor="#ffff" />
 
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

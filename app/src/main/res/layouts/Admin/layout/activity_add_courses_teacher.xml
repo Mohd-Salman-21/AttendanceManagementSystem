@@ -4,30 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient4"
     android:orientation="vertical"
-    tools:context="dell.example.com.letschat.Admin.AddCoursesTeacher"
-    android:background="@color/colorBlack">
+    tools:context="dell.example.com.letschat.Admin.AddCoursesTeacher">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         android:background="@drawable/bottom"
-        >
-
+        android:orientation="vertical"
+        android:padding="10dp">
 
 
         <EditText
             android:id="@+id/teacher_id_course_teacher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="Teacher Id"
             android:inputType="textPersonName"
@@ -37,28 +35,22 @@
             tools:layout_editor_absoluteX="8dp" />
 
 
-
-
-
-
-
         <Spinner
             android:id="@+id/spinner_department_teacher_course"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:entries="@array/department"
-            tools:layout_editor_absoluteX="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="8dp"
-            app:layout_constraintVertical_bias="0.549" />
+            android:layout_marginBottom="8dp"
+            android:entries="@array/department"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.549"
+            tools:layout_editor_absoluteX="8dp" />
 
         <Spinner
             android:id="@+id/spinner_course_admin"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-
 
 
             app:layout_constraintBottom_toBottomOf="parent"
@@ -67,28 +59,26 @@
             tools:layout_editor_absoluteX="8dp" />
 
 
-
-
         <Button
-                android:id="@+id/button9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:onClick="addCourseToTeacher"
-                android:text="ALLOCATE"
-                android:background="@drawable/selector"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_weight="1"
-                app:layout_constraintVertical_bias="0.863"
-                app:layout_constraintHorizontal_bias="0.171" />
+            android:id="@+id/button9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector"
+            android:onClick="addCourseToTeacher"
+            android:text="ALLOCATE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.171"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.863" />
 
     </LinearLayout>
 </LinearLayout>

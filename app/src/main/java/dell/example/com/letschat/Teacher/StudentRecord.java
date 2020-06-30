@@ -2,6 +2,7 @@ package dell.example.com.letschat.Teacher;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -37,6 +38,7 @@ public class StudentRecord extends AppCompatActivity implements AdapterView.OnIt
     float percent=(float) 0.0;
     ListView listView;
     EditText date,editText;
+    boolean flag=true;
 
     TextView one,two,three,four;
 
@@ -44,8 +46,8 @@ public class StudentRecord extends AppCompatActivity implements AdapterView.OnIt
 
 
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference dbAttendance;
-    DatabaseReference dbStudent,courses;
+    DatabaseReference dbAttendance,check;
+    DatabaseReference dbStudent,dbTeacher,courses;
 
 
     @Override
@@ -106,7 +108,8 @@ public class StudentRecord extends AppCompatActivity implements AdapterView.OnIt
         if(adapterView.getId()==R.id.studendRecordSpinnerDepartment)
         {
             departmentName=adapterView.getItemAtPosition(i).toString();
-            courseSelectionStudentRecord();
+             courseSelectionStudentRecord();
+
         }else if(adapterView.getId()==R.id.studentRecordSpinnerSemester)
         {
             semesterName=adapterView.getItemAtPosition(i).toString();
@@ -117,6 +120,7 @@ public class StudentRecord extends AppCompatActivity implements AdapterView.OnIt
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
 
 
 
@@ -172,27 +176,92 @@ public class StudentRecord extends AppCompatActivity implements AdapterView.OnIt
 
     public void studentRecordCalculate(View v) {
 
-        present=total=absent=0;
-        percent=(float)0.0;
+
+
         enroll = editText.getText().toString().toLowerCase().trim();
 
-        if(TextUtils.isEmpty(enroll))
-            Toast.makeText(getApplicationContext(),"Enrollment cannot be empty",Toast.LENGTH_LONG).show();
-          else {
+         if(TextUtils.isEmpty(enroll)) {
+             Toast.makeText(getApplicationContext(),"Enrollment cannot be empty",Toast.LENGTH_LONG).show();
 
-            dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseIdName);
-            dbAttendance.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                        p1 = dsp.child(enroll).child("p1").getValue().toString().substring(0, 1);
 
-                        if (p1.equals("A")) {
-                            absent++;
-                        } else
-                            present++;
+         }
+         else
+         {
+             checkTeacher();
+         }
+    }
 
+
+    public void checkTeacher()
+    {
+        dbTeacher=ref.child("Teacher").child("Department").child(departmentName).child(teacher_id);
+        dbTeacher.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists())
+                {
+                    goForCourseId();
+                }else
+                {
+                    Toast.makeText(getApplicationContext(),"Select Correct department for Teacher",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public  void  goForCourseId()
+    {
+        dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseIdName);
+        dbAttendance.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    functionEnrollment();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Record not found: Double check details", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+
+    public void functionEnrollment()
+    {
+        flag=true;
+
+        present = total = absent = 0;
+        percent = (float) 0.0;
+        dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseIdName);
+        dbAttendance.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                    if (!dsp.child(enroll).exists()) {
+                        Toast.makeText(getApplicationContext(), "Record not found: double check enrollment", Toast.LENGTH_LONG).show();
+                        flag = false;
+                        break;
                     }
+                    p1 = dsp.child(enroll).child("p1").getValue().toString().substring(0, 1);
+
+                    if (p1.equals("A")) {
+                        absent++;
+                    } else
+                        present++;
+
+                }
+
+                if (flag == true) {
 
                     total = absent + present;
                     String onem = Integer.toString(total);
@@ -216,18 +285,25 @@ public class StudentRecord extends AppCompatActivity implements AdapterView.OnIt
                         four.setTextColor(Color.RED);
 
 
-                    //Toast.makeText(getApplicationContext(), dates.toString(), Toast.LENGTH_LONG).show();
-
-
+                }else
+                {
+                    Toast.makeText(getApplicationContext(),"Enrollment not found",Toast.LENGTH_LONG).show();
                 }
+            }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_LONG).show();
-                }
-            });
 
-        }
+
+
+
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 

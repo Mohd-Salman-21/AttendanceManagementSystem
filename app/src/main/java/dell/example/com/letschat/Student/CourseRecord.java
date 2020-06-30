@@ -2,7 +2,9 @@ package dell.example.com.letschat.Student;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -134,52 +136,77 @@ public class CourseRecord extends AppCompatActivity implements AdapterView.OnIte
         courseName = course.getText().toString().toUpperCase().trim();
 
 
-        dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseName);
-        dbAttendance.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    p1 = dsp.child(student_id).child("p1").getValue().toString().substring(0, 1);
+        if(TextUtils.isEmpty(courseName))
+        {
+            Toast.makeText(getApplicationContext(),"Course code cannot be empty",Toast.LENGTH_LONG).show();
+        }else{
+            dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseName);
+            dbAttendance.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists())
+                    {
+                        dbAttendance = ref.child("Attendance").child("Department").child(departmentName).child("Semester").child(semesterName).child(courseName);
+                        dbAttendance.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                                    p1 = dsp.child(student_id).child("p1").getValue().toString().substring(0, 1);
 
-                    if(p1.equals("A")){
-                        absent++;
+                                    if(p1.equals("A")){
+                                        absent++;
+                                    }else
+                                        present++;
+
+                                }
+
+                                total = absent + present;
+                                String onem=Integer.toString(total);
+                                one.setText(onem);
+                                one.setTextColor(Color.BLACK);
+//
+                                String twom=Integer.toString(present);
+                                two.setText(twom);
+                                two.setTextColor(Color.GREEN);
+
+                                String threem=Integer.toString(absent);
+                                three.setText(threem);
+                                three.setTextColor(Color.RED);
+
+                                percent = (float)((present*100)/total);
+                                String fourm = Float.toString(percent);
+                                four.setText(fourm+" %");
+                                if(percent>=75)
+                                    four.setTextColor(Color.GREEN);
+                                if(percent<75)
+                                    four.setTextColor(Color.RED);
+
+
+                                //Toast.makeText(getApplicationContext(), dates.toString(), Toast.LENGTH_LONG).show();
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_LONG).show();
+                            }
+                        });
+
                     }else
-                        present++;
-
+                    {
+                        Toast.makeText(getApplicationContext(),"Record not found: Check inputs",Toast.LENGTH_LONG).show();
+                    }
                 }
 
-                total = absent + present;
-                String onem=Integer.toString(total);
-                one.setText(onem);
-                one.setTextColor(Color.BLACK);
-//
-                String twom=Integer.toString(present);
-                two.setText(twom);
-                two.setTextColor(Color.GREEN);
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                String threem=Integer.toString(absent);
-                three.setText(threem);
-                three.setTextColor(Color.RED);
-
-                percent = (float)((present*100)/total);
-                String fourm = Float.toString(percent);
-                four.setText(fourm+" %");
-                if(percent>=75)
-                    four.setTextColor(Color.GREEN);
-                if(percent<75)
-                    four.setTextColor(Color.RED);
+                }
+            });
+        }
 
 
-                //Toast.makeText(getApplicationContext(), dates.toString(), Toast.LENGTH_LONG).show();
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_LONG).show();
-            }
-        });
 
 
     }
